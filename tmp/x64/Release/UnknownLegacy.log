@@ -1,0 +1,77 @@
+﻿cl : ligne de commande warning D9025: substitution de '/sdl' par '/GS-'
+  PhysicManager.cpp
+cl : ligne de commande warning D9025: substitution de '/sdl' par '/GS-'
+  Renderer.cpp
+cl : ligne de commande warning D9025: substitution de '/sdl' par '/GS-'
+  ul.cpp
+cl : ligne de commande warning D9025: substitution de '/sdl' par '/GS-'
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(206): message : voir la référence à l'instanciation classe modèle 'glm::tvec2<T,P>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(227): message : voir la référence à l'instanciation classe modèle 'glm::tvec3<T,P>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(272): message : voir la référence à l'instanciation classe modèle 'glm::tvec4<T,P>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(7): message : note: Move and streams ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(8): message : note: Stream::write ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(9): message : note: Modularity std::ios::trunc
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(7): message : note: Move and streams ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(8): message : note: Stream::write ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(9): message : note: Modularity std::ios::trunc
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(7): message : note: Move and streams ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(8): message : note: Stream::write ?
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: A:\C++\UnknownLegacy\UnknownLegacy\src\utils\Stream.h(9): message : note: Modularity std::ios::trunc
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\gtc\quaternion.hpp(56,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\gtc\quaternion.hpp(132): message : voir la référence à l'instanciation classe modèle 'glm::tquat<T,P>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\filesystem(2091): message : voir la référence à l'instanciation classe modèle 'std::chrono::time_point<std::filesystem::_File_time_clock,std::filesystem::_File_time_clock::duration>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\xstring(1764): message : voir la référence à l'instanciation classe modèle 'std::basic_string_view<wchar_t,std::char_traits<wchar_t>>' en cours de compilation (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(206): message : voir la référence à l'instanciation classe modèle 'glm::tvec2<T,P>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\filesystem(2091): message : voir la référence à l'instanciation classe modèle 'std::chrono::time_point<std::filesystem::_File_time_clock,std::filesystem::_File_time_clock::duration>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include\xstring(1764): message : voir la référence à l'instanciation classe modèle 'std::basic_string_view<wchar_t,std::char_traits<wchar_t>>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec2.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(227): message : voir la référence à l'instanciation classe modèle 'glm::tvec3<T,P>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec3.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(45,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(272): message : voir la référence à l'instanciation classe modèle 'glm::tvec4<T,P>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(46,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\detail\type_vec4.hpp(47,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(96,10): warning C4189: 'cameraSpeed' : variable locale initialisée mais non référencée (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(107,37): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(118,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(119,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(120,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(121,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(111,27): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(128,32): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(127,43): warning C4100: 'xoffset' : paramètre formel non référencé (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(127,28): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\renderer\Renderer.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.cpp(78,23): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.cpp(102,29): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\gtc\quaternion.hpp(56,1): warning C4201: extension non standard utilisée : struct/union sans nom (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\include\glm\gtc\quaternion.hpp(132): message : voir la référence à l'instanciation classe modèle 'glm::tquat<T,P>' en cours de compilation (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(96,10): warning C4189: 'cameraSpeed' : variable locale initialisée mais non référencée (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(107,37): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(118,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(119,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(120,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(121,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(111,27): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(128,32): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(127,43): warning C4100: 'xoffset' : paramètre formel non référencé (compilation du fichier source src\ul.cpp)
+A:\C++\UnknownLegacy\UnknownLegacy\src\renderer\Renderer.h(127,28): warning C4100: 'window' : paramètre formel non référencé (compilation du fichier source src\ul.cpp)
+  Génération de code en cours
+A:\C++\UnknownLegacy\UnknownLegacy\src\ul.cpp(91): warning C4702: impossible d'atteindre le code
+  305 of 2327 functions (13.1%) were compiled, the rest were copied from previous compilation.
+    120 functions were new in current compilation
+    44 functions had inline decision re-evaluated but remain unchanged
+  Fin de la génération du code
+  UnknownLegacy.vcxproj -> A:\C++\UnknownLegacy\UnknownLegacy\bin\x64\Release\UnknownLegacy.exe

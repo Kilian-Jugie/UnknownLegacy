@@ -1,0 +1,18 @@
+[INFO] 
+[INFO] Starting PhysX...
+[ERROR] 
+[ERROR] [PhysX]C:\b\w\bc4f22ce46571d95\sw\physx\PhysXSDK\4.1\trunk\source\cudamanager\src\CudaContextManager.cpp(473): error 2: cuCtxGLCreate failed
+[INFO] 
+[INFO] PhysX initialization finished !
+sets\shaders\fragment.glsl
+[INFO] Done, filling VAO, VBO, (EBO)
+[INFO] Done, loading texture
+[INFO] Done, Generating GPUs draw commands
+[INFO] Done, entering main render loop
+[INFO] 1FPS
+[INFO] 720FPS
+[INFO] 1253FPS
+[INFO] 1332FPS
+[INFO] 1390FPS
+[INFO] 1364FPS
+[INFO] 1500FPS

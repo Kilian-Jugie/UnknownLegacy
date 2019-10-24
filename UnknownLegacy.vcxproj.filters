@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\extern">
+      <UniqueIdentifier>{f19cdb9b-0949-45d8-82a6-87b213675cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\filesystem">
+      <UniqueIdentifier>{d1839607-94b2-4d84-a427-d969921e73a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\filesystem">
+      <UniqueIdentifier>{9f212adf-204c-4f70-bf31-71b32a538d96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\renderer">
+      <UniqueIdentifier>{f154ab1e-0010-4dc8-a554-491e7b7d8a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\renderer">
+      <UniqueIdentifier>{ac88266e-070e-49c9-811b-abba412ee99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\utils">
+      <UniqueIdentifier>{fde296fc-4c92-404a-80b2-497cc8465c06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\utils">
+      <UniqueIdentifier>{8c06ed54-bda8-409a-a35e-760c447cecec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{f4c13abf-ad21-47a1-95d4-41ef00059d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\physic">
+      <UniqueIdentifier>{c964e683-e6a0-4b86-ba41-8b2184910fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\physic">
+      <UniqueIdentifier>{738a2968-ac0e-4dae-965b-4519effd2172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\maths">
+      <UniqueIdentifier>{9cd58380-643d-4376-901f-91b8dd67ea78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ul.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\extern\glad.c">
+      <Filter>Fichiers sources\extern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filesystem\AssetsManager.cpp">
+      <Filter>Fichiers sources\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filesystem\AssetLocation.cpp">
+      <Filter>Fichiers sources\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filesystem\UlFilesystem.cpp">
+      <Filter>Fichiers sources\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\ErrorManager.cpp">
+      <Filter>Fichiers sources\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Error.cpp">
+      <Filter>Fichiers sources\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Logger.cpp">
+      <Filter>Fichiers sources\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\global.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Shader.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Texture.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Camera.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Renderer.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physic\PhysicManager.cpp">
+      <Filter>Fichiers sources\physic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ul.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\AssetsManager.h">
+      <Filter>Fichiers d%27en-tête\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\Asset.h">
+      <Filter>Fichiers d%27en-tête\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\global.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\AssetLocation.h">
+      <Filter>Fichiers d%27en-tête\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\UlFilesystem.h">
+      <Filter>Fichiers d%27en-tête\filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\ErrorManager.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Error.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Utils.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Logger.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Stream.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\kPreprocessor.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\debug.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Camera.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Image.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Shader.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Renderer.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\StaticVertices.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Mesh.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Texture.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\RenderGroup.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\EventListener.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\EventThrower.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Event.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physic\PhysicManager.h">
+      <Filter>Fichiers d%27en-tête\physic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physic\UlPxErrorCallback.h">
+      <Filter>Fichiers d%27en-tête\physic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physic\UlPxAllocator.h">
+      <Filter>Fichiers d%27en-tête\physic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\maths\Vec.h">
+      <Filter>Fichiers d%27en-tête\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\ProxyBind.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\TypeTraits.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physic\RigidBodyProxy.h">
+      <Filter>Fichiers d%27en-tête\physic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\vertex.glsl">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="assets\shaders\fragment.glsl">
+      <Filter>assets</Filter>
+    </None>
+  </ItemGroup>
+</Project>
