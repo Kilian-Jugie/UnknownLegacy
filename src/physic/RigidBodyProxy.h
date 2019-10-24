@@ -2,6 +2,7 @@
 #include <PxPhysicsAPI.h>
 
 namespace ul {
+	/*
 	template<typename _BodyT>class _RigidProxy {
 	public:
 		_RigidProxy(_BodyT* b) : m_Body{b} {}
@@ -18,5 +19,5 @@ namespace ul {
 
 	private:
 
-	};
+	};*/
 }
