@@ -20,11 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\extern\glad.c" />
-    <ClCompile Include="src\filesystem\AssetLocation.cpp" />
-    <ClCompile Include="src\filesystem\AssetsManager.cpp" />
+    <ClCompile Include="src\filesystem\old\AssetLocation.cpp" />
+    <ClCompile Include="src\filesystem\old\AssetsManager.cpp" />
     <ClCompile Include="src\filesystem\UlFilesystem.cpp" />
     <ClCompile Include="src\global.cpp" />
-    <ClCompile Include="src\physic\PhysicManager.cpp" />
     <ClCompile Include="src\renderer\Camera.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
     <ClCompile Include="src\renderer\Shader.cpp" />
@@ -35,17 +34,27 @@
     <ClCompile Include="src\utils\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\filesystem\Asset.h" />
-    <ClInclude Include="src\filesystem\AssetLocation.h" />
     <ClInclude Include="src\filesystem\AssetsManager.h" />
+    <ClInclude Include="src\filesystem\old\Asset.h" />
+    <ClInclude Include="src\filesystem\old\AssetLocation.h" />
+    <ClInclude Include="src\filesystem\old\AssetRessourceType.h" />
+    <ClInclude Include="src\filesystem\old\AssetsManager.h" />
     <ClInclude Include="src\filesystem\UlFilesystem.h" />
+    <ClInclude Include="src\game\fwd.h" />
+    <ClInclude Include="src\game\GameObject.h" />
+    <ClInclude Include="src\game\Instanciable.h" />
+    <ClInclude Include="src\game\Position.h" />
+    <ClInclude Include="src\game\Utils.h" />
+    <ClInclude Include="src\game\world\block\Block.h" />
+    <ClInclude Include="src\game\world\block\BlockInstance.h" />
+    <ClInclude Include="src\game\world\Chunk.h" />
+    <ClInclude Include="src\game\world\Constants.h" />
+    <ClInclude Include="src\game\world\World.h" />
+    <ClInclude Include="src\game\world\InstancedObject.h" />
+    <ClInclude Include="src\game\world\WorldObject.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\kPreprocessor.h" />
     <ClInclude Include="src\maths\Vec.h" />
-    <ClInclude Include="src\physic\PhysicManager.h" />
-    <ClInclude Include="src\physic\RigidBodyProxy.h" />
-    <ClInclude Include="src\physic\UlPxAllocator.h" />
-    <ClInclude Include="src\physic\UlPxErrorCallback.h" />
     <ClInclude Include="src\renderer\Camera.h" />
     <ClInclude Include="src\renderer\Image.h" />
     <ClInclude Include="src\renderer\Mesh.h" />
@@ -64,12 +73,19 @@
     <ClInclude Include="src\utils\Logger.h" />
     <ClInclude Include="src\utils\ProxyBind.h" />
     <ClInclude Include="src\utils\Stream.h" />
+    <ClInclude Include="src\utils\StringUtils.h" />
+    <ClInclude Include="src\utils\Types.h" />
     <ClInclude Include="src\utils\TypeTraits.h" />
     <ClInclude Include="src\utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\fragment.glsl" />
     <None Include="assets\shaders\vertex.glsl" />
+    <None Include="src\filesystem\AssetsManager.inl" />
+    <None Include="src\game\Utils.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -136,13 +152,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\PhysX\PhysX-4.1\pxshared\include;A:\C++\UnknownLegacy\PhysX\PhysX-4.1\physx\include;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\UnknownLegacy\src\utils;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>A:\C++\UnknownLegacy\UnknownLegacy\libs\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PhysX_64.lib;PhysXCommon_64.lib;PhysXCooking_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;PhysXPvdSDK_static_64.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -151,7 +167,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\PhysX\PhysX-4.1\pxshared\include;A:\C++\UnknownLegacy\PhysX\PhysX-4.1\physx\include;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\UnknownLegacy\src\utils;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -167,7 +183,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>A:\C++\UnknownLegacy\UnknownLegacy\libs\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PhysX_64.lib;PhysXCommon_64.lib;PhysXCooking_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;PhysXPvdSDK_static_64.lib;glfw3dll.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -178,7 +194,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\PhysX\PhysX-4.1\pxshared\include;A:\C++\UnknownLegacy\PhysX\PhysX-4.1\physx\include;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\UnknownLegacy\src\utils;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -186,7 +202,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>A:\C++\UnknownLegacy\UnknownLegacy\libs\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PhysX_64.lib;PhysXCommon_64.lib;PhysXCooking_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;PhysXPvdSDK_static_64.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -197,7 +213,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\PhysX\PhysX-4.1\pxshared\include;A:\C++\UnknownLegacy\PhysX\PhysX-4.1\physx\include;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>A:\C++\UnknownLegacy\UnknownLegacy\src\utils;A:\C++\UnknownLegacy\UnknownLegacy\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
@@ -215,7 +231,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>A:\C++\UnknownLegacy\UnknownLegacy\libs\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PhysX_64.lib;PhysXCommon_64.lib;PhysXCooking_64.lib;PhysXFoundation_64.lib;PhysXExtensions_static_64.lib;PhysXPvdSDK_static_64.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

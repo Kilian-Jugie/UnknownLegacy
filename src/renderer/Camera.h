@@ -2,7 +2,6 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <PxPhysicsAPI.h>
 #include "../global.h"
 
 #include <vector>
@@ -27,15 +26,15 @@ namespace ul {
 	class Camera {
 	public:
 
-		Camera(physx::PxRigidDynamic* body, glm::vec3 position = glm::vec3{ 0.0f, 0.0f, 0.0f }, glm::vec3 up = glm::vec3{ 0.0f, 1.0f, 0.0f },
+		Camera(glm::vec3 position = glm::vec3{ 0.0f, 0.0f, 0.0f }, glm::vec3 up = glm::vec3{ 0.0f, 1.0f, 0.0f },
 			float yaw = YAW, float pitch = PITCH) noexcept 
 			: m_Front{ glm::vec3{0.0f, 0.0f, -1.0f} }, m_MovementSpeed{ SPEED }, m_MouseSensitivity{ SENSITIVITY }, m_Zoom{ ZOOM },
-			/*m_Position{ position },*/ m_WorldUp{ up }, m_Yaw{ yaw }, m_Pitch{ pitch }, m_Body{ body } {
+			/*m_Position{ position },*/ m_WorldUp{ up }, m_Yaw{ yaw }, m_Pitch{ pitch } {
 			updateCameraVectors();
 		}
 
 		~Camera() {
-			UL_PHYSX_RELEASE(m_Body);
+			//UL_PHYSX_RELEASE(m_Body);
 		}
 
 		/*Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) noexcept :
@@ -46,20 +45,20 @@ namespace ul {
 
 
 		inline glm::mat4 getViewMatrix() noexcept {
-			//return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
-			return glm::lookAt()
+			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
+			//return glm::lookAt();
 		}
 
 		void processKeyboard(CameraMovement direction, float deltaTime) noexcept {
 			float velocity = m_MovementSpeed * deltaTime;
-			/*if (direction == CameraMovement::FORWARD)
+			if (direction == CameraMovement::FORWARD)
 				m_Position += m_Front * velocity;
 			if (direction == CameraMovement::BACKWARD)
 				m_Position -= m_Front * velocity;
 			if (direction == CameraMovement::LEFT)
 				m_Position -= m_Right * velocity;
 			if (direction == CameraMovement::RIGHT)
-				m_Position += m_Right * velocity;*/
+				m_Position += m_Right * velocity;
 		}
 
 		void processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) noexcept {
@@ -91,12 +90,14 @@ namespace ul {
 		}
 
 		inline glm::vec3 getPosition() {
-			physx::PxTransform& pos = m_Body->getGlobalPose();
-			return { pos.p.x, pos.p.y, pos.p.z };
+			//physx::PxTransform& pos = m_Body->getGlobalPose();
+			//return { pos.p.x, pos.p.y, pos.p.z };
+			return m_Position;
 		}
 
 		inline void setPosition(glm::vec3 v) {
-			m_Body->setGlobalPose({ v.x, v.y, v.z });
+			//m_Body->setGlobalPose({ v.x, v.y, v.z });
+			m_Position = v;
 		}
 
 		inline void setSpeed(float newSpeed) noexcept {
@@ -126,7 +127,7 @@ namespace ul {
 	private:
 		void updateCameraVectors() noexcept;
 
-		//glm::vec3 m_Position;
+		glm::vec3 m_Position;
 		glm::vec3 m_Front;
 		glm::vec3 m_Up;
 		glm::vec3 m_Right;
@@ -138,7 +139,5 @@ namespace ul {
 		float m_MovementSpeed;
 		float m_MouseSensitivity;
 		float m_Zoom;
-
-		physx::PxRigidDynamic* m_Body;
 	};
 }

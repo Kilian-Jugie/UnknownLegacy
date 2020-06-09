@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/vec3.hpp>
-#include <foundation/PxVec3.h>
-#include <foundation/PxTransform.h>
+//#include <foundation/PxVec3.h>
+//#include <foundation/PxTransform.h>
 #include <type_traits>
 #include "../global.h"
 
@@ -23,38 +23,40 @@ namespace ul {
 			typename = std::enable_if_t<std::is_same_v<std::decay_t<_glm_vec3_t>, glm::vec3>>>
 			UL_VEC3_CEXPR_CTOR vec3(_glm_vec3_t&& v) noexcept : m_V{ std::forward<glm::vec3>(v) } {}
 
-		vec3(const physx::PxVec3& v) noexcept : m_V{v.x, v.y, v.z} {}
+		//vec3(const physx::PxVec3& v) noexcept : m_V{v.x, v.y, v.z} {}
 
-		vec3(const physx::PxTransform& t) noexcept : vec3(t.p) { }
+		//vec3(const physx::PxTransform& t) noexcept : vec3(t.p) { }
 
+		//TO CORRECT IF USE NEEDED !!!! (decay of physx vec not glm)
+		/*
 		template<typename _physx_trans_t,
 			typename = std::enable_if_t<std::is_same_v<std::decay_t<_physx_trans_t>, glm::vec3>>>
-			vec3(_physx_trans_t&& v) noexcept : vec3(std::forward<physx::PxVec3>(v.p)) {}
+			vec3(_physx_trans_t&& v) noexcept : vec3(std::forward<physx::PxVec3>(v.p)) {}*/
 
 
 		UL_FORCEINLINE glm::vec3 getGlmVec3() {
 			return m_V;
 		}
 
-		UL_FORCEINLINE physx::PxVec3 getPhysxVec3() {
+		/*UL_FORCEINLINE physx::PxVec3 getPhysxVec3() {
 			return physx::PxVec3{ m_V.x, m_V.y, m_V.z };
 		}
 
 		UL_FORCEINLINE physx::PxTransform getPhysxTransform() {
 			return physx::PxTransform{ getPhysxVec3() };
-		}
+		}*/
 
 		UL_FORCEINLINE operator glm::vec3() {
 			return getGlmVec3();
 		}
 
-		UL_FORCEINLINE operator physx::PxVec3() {
+		/*UL_FORCEINLINE operator physx::PxVec3() {
 			return getPhysxVec3();
 		}
 
 		UL_FORCEINLINE operator physx::PxTransform() {
 			return getPhysxTransform();
-		}
+		}*/
 
 		UL_FORCEINLINE const float& x() const noexcept {
 			return m_V.x;

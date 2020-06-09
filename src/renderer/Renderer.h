@@ -14,7 +14,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-#include "../physic/PhysicManager.h"
+//#include "../physic/PhysicManager.h"
 
 
 #define UL_ENABLE_ANTI_ALIASING
@@ -64,104 +64,22 @@ namespace ul {
 			if (m_isGlfwLoaded) freeGlfw();
 		}
 
-		int render(AssetsManager& assetManager, size_t shaderLocationId, PhysicManager& physicManager);
+		int render(AssetsManager& assetManager, size_t shaderLocationId/*, PhysicManager& physicManager*/);
 
-		inline void freeGlfw() {
-			glfwTerminate();
-			m_isGlfwLoaded = false;
-		}
+		void loadBasicAssets();
 
-		void processInput(GLFWwindow* window) {
-			if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-				glfwSetWindowShouldClose(window, true);
-			float cameraSpeed = 2.5f * m_DeltaTime;
-			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-				m_Camera->processKeyboard(CameraMovement::FORWARD, m_DeltaTime);
-			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-				m_Camera->processKeyboard(CameraMovement::BACKWARD, m_DeltaTime);
-			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-				m_Camera->processKeyboard(CameraMovement::LEFT, m_DeltaTime);
-			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-				m_Camera->processKeyboard(CameraMovement::RIGHT, m_DeltaTime);
-		}
+		inline void freeGlfw();
 
-		void frameBufferSizeC(GLFWwindow* window, int width, int height) {
-			glViewport(0, 0, width, height);
-		}
+		void processInput(GLFWwindow* window);
 
-		void mouseC(GLFWwindow* window, double xpos, double ypos) {
-			if (firstMouse) {
-				m_MouseLastX = static_cast<float>(xpos);
-				m_MouseLastY = static_cast<float>(ypos);
-				firstMouse = false;
-			}
-
-			float xoffset = xpos - m_MouseLastX;
-			float yoffset = m_MouseLastY - ypos; // reversed since y-coordinates go from bottom to top
-			m_MouseLastX = xpos;
-			m_MouseLastY = ypos;
-
-			m_Camera->processMouseMovement(xoffset, yoffset);
-		}
-
-
-		void scrollC(GLFWwindow* window, double xoffset, double yoffset) {
-			m_Camera->processMouseScroll(yoffset);
-		}
+		void frameBufferSizeC(GLFWwindow* window, int width, int height);
+		void mouseC(GLFWwindow* window, double xpos, double ypos);
+		void scrollC(GLFWwindow* window, double xoffset, double yoffset);
 
 		private:
 			void loadModelMatrices();
 
-			int initGlfw() {
-				linf << "Initializing GLFW...\n";
-				glfwInit();
-
-				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-				glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef UL_ENABLE_ANTI_ALIASING
-				glfwWindowHint(GLFW_SAMPLES, UL_ANTI_ALIASING_POWER);                                      
-#endif // UL_ENABLE_ANTIALISATING
-
-				m_Window = glfwCreateWindow(m_ScreenWidth, m_ScreenHeight, "UnknownLegacy", nullptr, nullptr);
-				if (m_Window == nullptr) {
-					lfat << "Failed to create GLFW window\n";
-					glfwTerminate();
-					return -1;
-				}
-				glfwMakeContextCurrent(m_Window);
-				glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
-				glfwSetCursorPosCallback(m_Window, mouse_callback);
-				glfwSetScrollCallback(m_Window, scroll_callback);
-				glfwSwapInterval(0);
-
-				glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-				m_isGlfwLoaded = true;
-
-				if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-					lfat << "Failed to initialize GLAD\n";
-					return -1;
-				}
-
-				glEnable(GL_DEPTH_TEST);
-
-#ifdef UL_ENABLE_ANTI_ALIASING
-#if UL_ANTI_ALIASING == MSAA
-				glEnable(GL_MULTISAMPLE);
-#else
-#error Incorrect Anti-Aliasing technology
-#endif // 
-
-#endif // UL_ENABLE_ANTI_ALIASING
-
-
-
-
-				linf << "Initialization done !\n";
-				return 0;
-			}
+			int initGlfw();
 
 			private:
 			const unsigned int m_ScreenWidth = 800;

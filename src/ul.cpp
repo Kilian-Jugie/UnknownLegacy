@@ -44,6 +44,10 @@ void ul::UnknownLegacy::setupLocations() {
 	linf << "Shaders location set to: " << m_AssetsManager.getLocation(m_ShaderLocationId).getPath().string() << "\n";
 }
 
+void ul::UnknownLegacy::loadBasicAssets() {
+
+}
+
 ul::ReturnCodes ul::UnknownLegacy::start() {
 	linf << "Starting UnknownLegacy yeay !\n";
 
@@ -57,15 +61,15 @@ ul::ReturnCodes ul::UnknownLegacy::start() {
 
 	this->setupLocations();
 
-	m_PhysicManager = &PhysicManager::get();
+	//m_PhysicManager = &PhysicManager::get();
 	
 	auto fRenderer = std::async(std::launch::async, &Renderer::render, &Renderer::getRenderer(),
-		std::ref(m_AssetsManager), m_ShaderLocationId, std::ref(*m_PhysicManager)); 
+		std::ref(m_AssetsManager), m_ShaderLocationId/*, std::ref(*m_PhysicManager)*/); 
 	linf << "Render started !\n";
 	int code = fRenderer.get();
 	linf << "Finished Render with code: " << code << "\n";
 
-	m_PhysicManager = nullptr;
+	//m_PhysicManager = nullptr;
 	
 	return ReturnCodes::NOERROR;
 }
