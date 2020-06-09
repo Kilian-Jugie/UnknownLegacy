@@ -1,0 +1,54 @@
+bindless textures (better)
+textures array
+ssbo
+ubo
+
+
+Vulkan ?
+
+Shader class: perfect forwarding
+Renderer:
+	- Model matrices loading
+	- Textures loading & mapping
+	- Multimesh multidraw
+	- Move timers on other thread
+	- ClearColor for sun ?
+	- Logging on game logic thread ?
+
+Global:
+	- ASM maths
+	- 
+	
+	
+	
+Client 4 Threads repartition :
+	0. Render
+	1. Physic
+	2. Game Logic (Timers, Other)
+	3. Game Logic (World, Network, Disk Operations)
+	
+Server 4 Threads repartition :
+	0. Network
+	1. Game Logic (Timers, World)
+	2. Worldgen
+	3. General Logic (Disk Operations, Other)
+	
+Client 8 Threads repartition :
+	0. Render
+	1. Physic
+	2. Game Logic Timers
+	3. Game Logic Disk Operations
+	4. Game Logic World
+	5. Network
+	6.
+	7.
+	
+Server 8 Threads repartition :
+	0. Network
+	1. General Timers
+	2. General Logic (Disk ops, Other)
+	3. Game Logic World
+	4. Game Logic World
+	5. Worldgen
+	6. Worldgen
+	7. 

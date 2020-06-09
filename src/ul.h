@@ -4,7 +4,7 @@
 #include "filesystem/AssetsManager.h"
 #include "utils/ErrorManager.h"
 #include "utils/Logger.h"
-#include "physic/PhysicManager.h"
+//#include "physic/PhysicManager.h"
 
 namespace ul {
 	enum class ReturnCodes : int {
@@ -29,6 +29,7 @@ namespace ul {
 		UnknownLegacy& operator=(UnknownLegacy&&) = delete;
 
 		void setupLocations();
+		void loadBasicAssets();
 
 		ReturnCodes start();
 		void terminate();
@@ -39,14 +40,18 @@ namespace ul {
 		bool processWarning(Error& e);
 		bool processDebug(Error& e);
 
+		AssetsManager& getAssetsManager() noexcept {
+			return m_AssetsManager;
+		}
+
 	private:
-		UnknownLegacy() : m_ErrorManager{}, m_AssetsManager{ UL_S("assets"), m_ErrorManager }, m_ShaderLocationId{ 0 }, m_PhysicManager{ nullptr } {
+		UnknownLegacy() : m_ErrorManager{}, m_AssetsManager{ UL_S("assets"), m_ErrorManager }, m_ShaderLocationId{ 0 }/*, m_PhysicManager{ nullptr }*/ {
 		};
 		
 		AssetsManager m_AssetsManager;
 		ErrorManager m_ErrorManager;
 		size_t m_ShaderLocationId;
-		PhysicManager* m_PhysicManager;
+		//PhysicManager* m_PhysicManager;
 		
 	};
 }

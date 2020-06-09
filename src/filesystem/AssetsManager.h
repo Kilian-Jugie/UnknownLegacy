@@ -1,30 +1,39 @@
 #pragma once
 #include "../global.h"
-#include "Asset.h"
-#include <string>
+#include <type_traits>
+#include <vector>
 #include <filesystem>
 
 namespace ul {
+	template<typename _T>_T AssetLoader(std::filesystem::path&) = delete;
+	
+
+	template<>std::wstring AssetLoader(std::filesystem::path& p) {
+		return L"";
+	}
 
 	class AssetsManager {
+		using path_t = std::filesystem::path;
+
+		std::vector<path_t> m_Folders;
+
 	public:
-		using string_t = std::basic_string<ulfchar_t>;
-		using osstream_t = std::basic_ostringstream<ulfchar_t>;
+		template<typename _T,
+			typename = std::enable_if_t<std::is_constructible_v<path_t, std::decay_t<_T>>>>
+			AssetsManager& addFolder(_T&& f, bool subs);
 
-		AssetsManager(const std::filesystem::path& assetsFolder, ErrorManager& errorManager);
+		template<typename _T, typename _pT,
+			typename = std::enable_if_t<std::is_constructible_v<path_t, std::decay_t<_pT>>>>
+			_T & get(_pT&& filename);
 
-		inline const std::filesystem::path& getAssetsPath() const noexcept {
-			return m_Path;
-		}
+		template<typename _T, typename _p1T, typename _p2T,
+			typename = std::enable_if_t<std::is_constructible_v<path_t, std::decay_t<_p1T>>>,
+			typename = std::enable_if_t<std::is_constructible_v<path_t, std::decay_t<_p2T>>>>
+			_T & get(_p1T&& filename, _p2T&& folder);
 
-		size_t addLocation(AssetLocation& loc);
 
-		AssetLocation& getLocation(size_t id);
-		AssetLocation& getLocation(string_t name, bool addIfNotExist=false);
-
-	private:
-		ErrorManager& m_ErrorManager;
-		std::filesystem::path m_Path;
-		std::vector<AssetLocation> m_Locations;
 	};
+
 }
+
+#include "AssetsManager.inl"

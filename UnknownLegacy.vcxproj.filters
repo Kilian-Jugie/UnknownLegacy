@@ -37,14 +37,35 @@
     <Filter Include="assets">
       <UniqueIdentifier>{f4c13abf-ad21-47a1-95d4-41ef00059d3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\physic">
-      <UniqueIdentifier>{c964e683-e6a0-4b86-ba41-8b2184910fa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\physic">
-      <UniqueIdentifier>{738a2968-ac0e-4dae-965b-4519effd2172}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\maths">
       <UniqueIdentifier>{9cd58380-643d-4376-901f-91b8dd67ea78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{79aae063-711f-4e75-a28e-ef48601ad67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\game">
+      <UniqueIdentifier>{35ee1782-dc29-45fe-932b-9ccc1efef6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\game\world">
+      <UniqueIdentifier>{7b047a75-fb62-4dff-824a-1af9d80fa413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\utils\game">
+      <UniqueIdentifier>{7bfee950-9045-4c56-a6ed-1f67fb97721b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\game">
+      <UniqueIdentifier>{642c7322-96b8-49a6-8682-00d92251b1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\game\world">
+      <UniqueIdentifier>{7659327c-aa1b-4b91-956a-35166dd9802e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\game\world\block">
+      <UniqueIdentifier>{0cb2c490-7fbd-4790-b29a-f7f3b70d2a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\filesystem\old">
+      <UniqueIdentifier>{501d6d2d-08dd-4522-8415-4b7aab012762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\filesystem\old">
+      <UniqueIdentifier>{a390ef8a-e7fc-4b0b-9309-07ebcadb7067}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,12 +74,6 @@
     </ClCompile>
     <ClCompile Include="src\extern\glad.c">
       <Filter>Fichiers sources\extern</Filter>
-    </ClCompile>
-    <ClCompile Include="src\filesystem\AssetsManager.cpp">
-      <Filter>Fichiers sources\filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="src\filesystem\AssetLocation.cpp">
-      <Filter>Fichiers sources\filesystem</Filter>
     </ClCompile>
     <ClCompile Include="src\filesystem\UlFilesystem.cpp">
       <Filter>Fichiers sources\filesystem</Filter>
@@ -87,25 +102,19 @@
     <ClCompile Include="src\renderer\Renderer.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\physic\PhysicManager.cpp">
-      <Filter>Fichiers sources\physic</Filter>
+    <ClCompile Include="src\filesystem\old\AssetLocation.cpp">
+      <Filter>Fichiers sources\filesystem\old</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filesystem\old\AssetsManager.cpp">
+      <Filter>Fichiers sources\filesystem\old</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ul.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\filesystem\AssetsManager.h">
-      <Filter>Fichiers d%27en-tête\filesystem</Filter>
-    </ClInclude>
-    <ClInclude Include="src\filesystem\Asset.h">
-      <Filter>Fichiers d%27en-tête\filesystem</Filter>
-    </ClInclude>
     <ClInclude Include="src\global.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\filesystem\AssetLocation.h">
-      <Filter>Fichiers d%27en-tête\filesystem</Filter>
     </ClInclude>
     <ClInclude Include="src\filesystem\UlFilesystem.h">
       <Filter>Fichiers d%27en-tête\filesystem</Filter>
@@ -164,15 +173,6 @@
     <ClInclude Include="src\utils\Event.h">
       <Filter>Fichiers d%27en-tête\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\physic\PhysicManager.h">
-      <Filter>Fichiers d%27en-tête\physic</Filter>
-    </ClInclude>
-    <ClInclude Include="src\physic\UlPxErrorCallback.h">
-      <Filter>Fichiers d%27en-tête\physic</Filter>
-    </ClInclude>
-    <ClInclude Include="src\physic\UlPxAllocator.h">
-      <Filter>Fichiers d%27en-tête\physic</Filter>
-    </ClInclude>
     <ClInclude Include="src\maths\Vec.h">
       <Filter>Fichiers d%27en-tête\maths</Filter>
     </ClInclude>
@@ -182,8 +182,62 @@
     <ClInclude Include="src\utils\TypeTraits.h">
       <Filter>Fichiers d%27en-tête\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\physic\RigidBodyProxy.h">
-      <Filter>Fichiers d%27en-tête\physic</Filter>
+    <ClInclude Include="src\game\world\World.h">
+      <Filter>Fichiers d%27en-tête\game\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\StringUtils.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Types.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\Chunk.h">
+      <Filter>Fichiers d%27en-tête\game\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\Constants.h">
+      <Filter>Fichiers d%27en-tête\game\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\GameObject.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\WorldObject.h">
+      <Filter>Fichiers d%27en-tête\game\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\block\Block.h">
+      <Filter>Fichiers d%27en-tête\game\world\block</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\block\BlockInstance.h">
+      <Filter>Fichiers d%27en-tête\game\world\block</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\fwd.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Instanciable.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Utils.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Position.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\world\InstancedObject.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\old\Asset.h">
+      <Filter>Fichiers d%27en-tête\filesystem\old</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\old\AssetLocation.h">
+      <Filter>Fichiers d%27en-tête\filesystem\old</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\old\AssetRessourceType.h">
+      <Filter>Fichiers d%27en-tête\filesystem\old</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\old\AssetsManager.h">
+      <Filter>Fichiers d%27en-tête\filesystem\old</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filesystem\AssetsManager.h">
+      <Filter>Fichiers d%27en-tête\filesystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,5 +247,16 @@
     <None Include="assets\shaders\fragment.glsl">
       <Filter>assets</Filter>
     </None>
+    <None Include="src\game\Utils.inl">
+      <Filter>Fichiers sources\game</Filter>
+    </None>
+    <None Include="src\filesystem\AssetsManager.inl">
+      <Filter>Fichiers sources\filesystem</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt">
+      <Filter>Other</Filter>
+    </Text>
   </ItemGroup>
 </Project>

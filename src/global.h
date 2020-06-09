@@ -16,13 +16,13 @@ namespace ul {
 }
 
 #define __UL_AN_PREFIX "[UL DEV] "
-#define _UL_AN_ERR(...) _k_an_add_p(__UL_AN_PREFIX, _k_e_an, C0, __VA_ARGS__)
-#define _UL_AN_WAR(...) _k_an_add_p(__UL_AN_PREFIX, _k_w_an, NA, __VA_ARGS__)
-#define _UL_AN_INF(...) _k_an_add_p(__UL_AN_PREFIX, _k_i_an, NA, __VA_ARGS__)
+#define _UL_AN_ERR(...) _K_AN_ADD_PREFIX(__UL_AN_PREFIX, _K_AN_ERROR, C0, __VA_ARGS__)
+#define _UL_AN_WAR(...) _K_AN_ADD_PREFIX(__UL_AN_PREFIX, _K_AN_WARNING, NA, __VA_ARGS__)
+#define _UL_AN_INF(...) _K_AN_ADD_PREFIX(__UL_AN_PREFIX, _K_AN_MESSAGE, NA, __VA_ARGS__)
 
-#define UL_AN_TODO(...) _k_an_add_p(" TODO: ",_k_i_an,TODO,__VA_ARGS__)
-#define UL_AN_MUST(...) _k_an_add_p("Must be done before release: ",_k_i_an,TODO,__VA_ARGS__)
-#define UL_AN_NOTE(...) _k_an_add_p("note: ", _k_i_an,N,__VA_ARGS__)
+#define UL_AN_TODO(...) _K_AN_ADD_PREFIX(" TODO: ",_K_AN_MESSAGE,TODO,__VA_ARGS__)
+#define UL_AN_MUST(...) _K_AN_ADD_PREFIX("Must be done before release: ",_K_AN_MESSAGE,TODO,__VA_ARGS__)
+#define UL_AN_NOTE(...) _K_AN_ADD_PREFIX("note: ", _K_AN_MESSAGE,N,__VA_ARGS__)
 
 #ifndef _UL_SILENT_DEPRECATED_OPLITERAL_ULS
 #define _UL_DEPRECATED_OPLITERAL_ULS [[deprecated( \
@@ -107,6 +107,8 @@ namespace ul {
 #define UL_INLINE inline
 #define UL_NOEXCEPT noexcept
 #endif // UL_DEBUG
+
+#define UL_LAST(x) x[x.size()-1]
 
 #define DEBUG_RENDER_X 128
 #define DEBUG_RENDER_Y 128
