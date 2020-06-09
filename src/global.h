@@ -108,6 +108,8 @@ namespace ul {
 #define UL_NOEXCEPT noexcept
 #endif // UL_DEBUG
 
+#define UL_LAST(x) x[x.size()-1]
+
 #define DEBUG_RENDER_X 128
 #define DEBUG_RENDER_Y 128
 #define DEBUG_RENDER_AMOUNT DEBUG_RENDER_X * DEBUG_RENDER_Y
