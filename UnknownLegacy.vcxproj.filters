@@ -67,6 +67,12 @@
     <Filter Include="Fichiers sources\filesystem\old">
       <UniqueIdentifier>{a390ef8a-e7fc-4b0b-9309-07ebcadb7067}</UniqueIdentifier>
     </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{4b90e477-1fc0-4424-ac7f-ff9f99de9cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\shaders">
+      <UniqueIdentifier>{6af847c7-6e15-46ab-b73b-3203356472c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ul.cpp">
@@ -107,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="src\filesystem\old\AssetsManager.cpp">
       <Filter>Fichiers sources\filesystem\old</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Mesh.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\TextRenderer.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +218,6 @@
     <ClInclude Include="src\game\world\block\Block.h">
       <Filter>Fichiers d%27en-tête\game\world\block</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\world\block\BlockInstance.h">
-      <Filter>Fichiers d%27en-tête\game\world\block</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\fwd.h">
       <Filter>Fichiers d%27en-tête\game</Filter>
     </ClInclude>
@@ -239,6 +248,12 @@
     <ClInclude Include="src\filesystem\AssetsManager.h">
       <Filter>Fichiers d%27en-tête\filesystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\HlMesh.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\TextRenderer.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\vertex.glsl">
@@ -252,6 +267,18 @@
     </None>
     <None Include="src\filesystem\AssetsManager.inl">
       <Filter>Fichiers sources\filesystem</Filter>
+    </None>
+    <None Include="Data\shaders\fragment.glsl">
+      <Filter>data\shaders</Filter>
+    </None>
+    <None Include="Data\shaders\vertex.glsl">
+      <Filter>data\shaders</Filter>
+    </None>
+    <None Include="Data\shaders\text.vs">
+      <Filter>data\shaders</Filter>
+    </None>
+    <None Include="Data\shaders\text.fs">
+      <Filter>data\shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

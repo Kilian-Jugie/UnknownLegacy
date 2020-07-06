@@ -1,4 +1,4 @@
-#include "AssetsManager.h"
+/*#include "AssetsManager.h"
 #include "UlFilesystem.h"
 #include "AssetLocation.h"
 #include "../utils/ErrorManager.h"
@@ -15,10 +15,10 @@ size_t ul::AssetsManager::addLocation(AssetLocation& loc){
 			osstream_t os;
 			os << UL_FS("The location '") << loc.getName() << UL_FS("' is already registered as an asset location ! This should be changed !\n");
 			m_ErrorManager.copyError({ ErrorLevel::WARNING, os.str() });
-			/*
-				Modularity security lack ?
-				What happend if we use a non random access iterator on this ?
-			*/
+			
+				//Modularity security lack ?
+				//What happend if we use a non random access iterator on this ?
+			
 			return l - m_Locations.begin();
 		}
 	}
@@ -30,10 +30,9 @@ size_t ul::AssetsManager::addLocation(AssetLocation& loc){
 namespace ul {
 
 	AssetLocation& AssetsManager::getLocation(size_t id) {
-		/*
-			This error must be fatal because use of invalid id for a location
-			is like trying to get things in a non existing place.
-		*/
+		
+			//This error must be fatal because use of invalid id for a location
+			//is like trying to get things in a non existing place.
 		if (id<0 || id > m_Locations.size()) {
 			osstream_t os;
 			os << UL_FS("The location id ") << id << UL_FS(" is invalid !\n");
@@ -58,3 +57,4 @@ namespace ul {
 	}
 
 }
+*/

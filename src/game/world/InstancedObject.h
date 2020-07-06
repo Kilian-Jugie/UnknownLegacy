@@ -52,6 +52,8 @@ namespace ul {
 
 	*/
 	struct InstancedObject {
+		InstancedObject(glm::mat4 mod, const WorldObject& obj): model{std::move(mod)}, obj{obj} {}
 		glm::mat4 model;
+		const WorldObject& obj;
 	};
 }

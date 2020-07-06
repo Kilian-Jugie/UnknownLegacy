@@ -1,5 +1,5 @@
 #include "ul.h"
-#include "filesystem/AssetLocation.h"
+//#include "filesystem/AssetLocation.h"
 #include "utils/Logger.h"
 
 #include <iostream>
@@ -39,9 +39,9 @@ bool debugCallback(ul::Error& e) {
 
 
 void ul::UnknownLegacy::setupLocations() {
-	AssetLocation shaderLoc("shaders", m_AssetsManager.getAssetsPath());
-	m_ShaderLocationId = m_AssetsManager.addLocation(shaderLoc);
-	linf << "Shaders location set to: " << m_AssetsManager.getLocation(m_ShaderLocationId).getPath().string() << "\n";
+	//AssetLocation shaderLoc("shaders", m_AssetsManager.getAssetsPath());
+	m_ShaderLocationId = m_AssetsManager.addFolder("shaders");
+	//linf << "Shaders location set to: " << m_AssetsManager.getLocation(m_ShaderLocationId).getPath().string() << "\n";
 }
 
 void ul::UnknownLegacy::loadBasicAssets() {

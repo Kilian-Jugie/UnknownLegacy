@@ -2,7 +2,7 @@
 #include "../../fwd.h"
 #include "../WorldObject.h"
 #include "../renderer/StaticVertices.h"
-#include "BlockInstance.h"
+//#include "BlockInstance.h"
 
 namespace ul {
 	

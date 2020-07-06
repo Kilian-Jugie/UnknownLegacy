@@ -35,5 +35,15 @@ namespace ul {
 #endif // UL_USE_WCHAR
 
 	};
+
+	static std::string wtos(const std::wstring& ws) {
+		static std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+		return conv.to_bytes(ws);
+	}
+
+	static std::wstring stow(const std::string& s) {
+		static std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+		return conv.from_bytes(s);
+	}
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "fwd.h"
 #include <type_traits>
+#include <codecvt>
 
 namespace ul {
 	class Utils {

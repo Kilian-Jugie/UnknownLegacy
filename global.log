@@ -2,17 +2,9 @@
 [INFO] Initializing GLFW...
 [INFO] Initialization done !
 [INFO] Done, compiling shaders
-[INFO] Shaders location: assets\shaders
-[INFO] Vertex path: assets\shaders\vertex.glsl
-[INFO] Fragment path: assets\shaders\fragment.glsl
+[INFO] Vertex path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\vertex.glsl
+[INFO] Fragment path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\fragment.glsl
 [INFO] Done, filling VAO, VBO, (EBO)
 [INFO] Done, loading texture
 [INFO] Done, Generating GPUs draw commands
 [INFO] Done, entering main render loop
-[INFO] 1FPS
-[INFO] 2814FPS
-[INFO] 3241FPS
-[INFO] 3327FPS
-[INFO] 3016FPS
-[INFO] 3076FPS
-[INFO] 3099FPS

@@ -45,12 +45,12 @@ namespace ul {
 		}
 
 	private:
-		UnknownLegacy() : m_ErrorManager{}, m_AssetsManager{ UL_S("assets"), m_ErrorManager }, m_ShaderLocationId{ 0 }/*, m_PhysicManager{ nullptr }*/ {
+		UnknownLegacy() : m_ErrorManager{}, m_AssetsManager{ std::filesystem::current_path() / "Data" }, m_ShaderLocationId{ 0 }/*, m_PhysicManager{ nullptr }*/ {
 		};
 		
 		AssetsManager m_AssetsManager;
 		ErrorManager m_ErrorManager;
-		size_t m_ShaderLocationId;
+		AssetsManager::id_t m_ShaderLocationId;
 		//PhysicManager* m_PhysicManager;
 		
 	};

@@ -1,4 +1,4 @@
-#include "AssetLocation.h"
+/*#include "AssetLocation.h"
 #include "AssetsManager.h"
 #include "UlFilesystem.h"
 #include "../global.h"
@@ -9,4 +9,4 @@ namespace ul {
 		
 		createFolderIfNotExists(m_Path);
 	}
-}
+}*/

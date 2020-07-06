@@ -110,8 +110,8 @@ namespace ul {
 
 #define UL_LAST(x) x[x.size()-1]
 
-#define DEBUG_RENDER_X 128
-#define DEBUG_RENDER_Y 128
+#define DEBUG_RENDER_X 1
+#define DEBUG_RENDER_Y 1
 #define DEBUG_RENDER_AMOUNT DEBUG_RENDER_X * DEBUG_RENDER_Y
 
 #define UL_PHYSX_RELEASE(x) if(x) {x->release(); x = nullptr;}

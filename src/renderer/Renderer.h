@@ -5,7 +5,7 @@
 #include "Texture.h"
 #include "StaticVertices.h"
 #include "../utils/Logger.h"
-#include "../filesystem/AssetLocation.h"
+//#include "../filesystem/AssetLocation.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -39,13 +39,7 @@ namespace ul {
 		Renderer() : m_Window{ nullptr } {
 		}
 
-		struct IndirectDrawCmd {
-			GLuint vertexCount;
-			GLuint instanceCount;
-			GLuint firstIndex;
-			GLuint baseVertex;
-			GLuint baseInstance;
-		};
+		
 
 		using physcallback_t = void(*)(float,void*);
 
@@ -75,6 +69,14 @@ namespace ul {
 		void frameBufferSizeC(GLFWwindow* window, int width, int height);
 		void mouseC(GLFWwindow* window, double xpos, double ypos);
 		void scrollC(GLFWwindow* window, double xoffset, double yoffset);
+
+		struct IndirectDrawCmd {
+			GLuint vertexCount;
+			GLuint instanceCount;
+			GLuint firstIndex;
+			GLuint baseVertex;
+			GLuint baseInstance;
+		};
 
 		private:
 			void loadModelMatrices();

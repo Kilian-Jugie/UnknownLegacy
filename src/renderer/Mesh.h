@@ -3,18 +3,23 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+
 namespace ul {
 	class Mesh {
 	public:
 
 		using buffer_t = unsigned int;
 
-		Mesh(const float* vertices, GLuint verticesSize, const GLushort* indices,
+		Mesh(const float* vertices, GLuint verticesSize, const float* texCoords, GLuint textcoordsSize, const GLushort* indices,
 			GLuint indicesSize)  noexcept
-			: m_Vertices{ vertices }, m_Indices{ indices },
-			m_VAO{ 0 }, m_VBO{ 0 }, m_EBO{ 0 },
+			: m_Vertices{ vertices }, m_TexCoords{ texCoords }, m_TexCoordsSize{ textcoordsSize },
+			m_Indices{ indices }, m_VAO{ 0 }, m_VBO{ 0 }, m_EBO{ 0 },
 			m_VerticesSize{ verticesSize }, m_IndicesSize{ indicesSize }, m_ArrayIndex{ 0 } {
 			configure();
+		}
+
+		~Mesh() {
+			//glDeleteBuffers(4, {})
 		}
 
 		inline buffer_t getVAO() const noexcept {
@@ -32,6 +37,16 @@ namespace ul {
 		inline buffer_t getArrayIndex() const noexcept {
 			return m_ArrayIndex;
 		}
+
+		inline const float* getVertices() const noexcept {
+			return m_Vertices;
+		}
+		
+		inline size_t getVerticesSize() const noexcept {
+			return m_VerticesSize;
+		}
+
+		void genDrawCommand();
 
 	protected:
 		virtual void configure() noexcept {
@@ -60,10 +75,14 @@ namespace ul {
 
 		virtual GLuint setupVertexAttribsArrays(GLuint begin) noexcept {
 			glEnableVertexAttribArray(begin);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+			glVertexAttribPointer(begin, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+			glGenBuffers(1, &m_TXC);
+			glBindBuffer(GL_ARRAY_BUFFER, m_TXC);
+			glBufferData(GL_ARRAY_BUFFER, m_TexCoordsSize, m_TexCoords, GL_STATIC_DRAW);
 
 			glEnableVertexAttribArray(++begin);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+			glVertexAttribPointer(begin, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 			return ++begin;
 		}
 
@@ -88,10 +107,11 @@ namespace ul {
 		}
 
 
-		buffer_t m_VAO, m_VBO, m_EBO, m_ArrayIndex;
+		buffer_t m_VAO, m_VBO, m_EBO, m_TXC, m_ArrayIndex;
 
 		const float* m_Vertices;
+		const float* m_TexCoords;
 		const GLushort* m_Indices;
-		const GLuint m_VerticesSize, m_IndicesSize;
+		const GLuint m_VerticesSize, m_IndicesSize, m_TexCoordsSize;
 	};
 }

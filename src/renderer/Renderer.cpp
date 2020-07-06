@@ -3,6 +3,9 @@
 #include "RenderGroup.h"
 #include "../game/world/Chunk.h"
 #include "../ul.h"
+#include "../utils/StringUtils.h"
+#include "TextRenderer.h"
+#include <fmt/format.h>
 
 namespace ul {
 	void Renderer::loadModelMatrices() {
@@ -10,7 +13,7 @@ namespace ul {
 			for (size_t z(0u); z < DEBUG_RENDER_Y; ++z) {
 				glm::mat4 model = glm::mat4(1.f);
 				model = glm::translate(model, glm::vec3((float)x, 0.0f, (float)z));
-				model = glm::scale(model, glm::vec3(1.f));
+				model = glm::scale(model, glm::vec3(0.5f));
 				//model = glm::rotate(model, 0.f, glm::vec3(1.f));
 				m_ModelMatrices[x * DEBUG_RENDER_X + z] = model;
 			}
@@ -82,23 +85,38 @@ namespace ul {
 		linf << "Done, compiling shaders\n";
 		
 		//glEnable(GL_CULL_FACE);
-		//glCullFace(GL_FRONT);
-		//glFrontFace(GL_CW);
+		//glCullFace(GL_BACK);
+		//glFrontFace(GL_CCW);
+		//glEnable(GL_CULL_FACE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		linf << "Shaders location: " << assetManager.getLocation(shaderLocationId).getPath().string() << "\n";
-		linf << "Vertex path: " << assetManager.getLocation(shaderLocationId).file("vertex.glsl") << "\n";
-		linf << "Fragment path: " << assetManager.getLocation(shaderLocationId).file("fragment.glsl") << "\n";
+		///linf << "Shaders location: " << assetManager.getLocation(shaderLocationId).getPath().string() << "\n";
+		linf << "Vertex path: " << wtos(assetManager.getPath("vertex.glsl", shaderLocationId)) << "\n";
+		linf << "Fragment path: " << wtos(assetManager.getPath("fragment.glsl", shaderLocationId)) << "\n";
 
-		Shader shader(assetManager.getLocation(shaderLocationId).file("vertex.glsl").c_str(),
-			assetManager.getLocation(shaderLocationId).file("fragment.glsl").c_str());
+		Shader shader(wtos(assetManager.getPath("vertex.glsl", shaderLocationId)).c_str(),
+			wtos(assetManager.getPath("fragment.glsl", shaderLocationId)).c_str());
 
 		linf << "Done, filling VAO, VBO, (EBO)\n";
 
-		Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeIndices, sizeof(gCubeIndices)};
+		TextRenderer txt;
+		txt.initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
 
-		RenderGroup cubeGroup{ static_cast<const Mesh&>(cube), DEBUG_RENDER_AMOUNT, m_ModelMatrices };
+		
+		Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeTexCoords, sizeof(gCubeTexCoords), nullptr, 0/*sizeof(gCubeIndices)*/};
+
+		Chunk ch{ {0,0,0} };
+
+		Mesh tbm = /*gBlockHlMesh.toMesh();*/ ch.toMesh(nullptr); // gBlockHlMesh.getAsMesh(HlMesh::Faces::UP);
+		//Mesh stbm(gCubeVertices, tbm.getVerticesSize(), nullptr, 0);
+
+		//linf << memcmp(tbm.getVertices(), cube.getVertices(), cube.getVerticesSize()) << "\n";
+			
+		RenderGroup cubeGroup{ static_cast<const Mesh&>(tbm), DEBUG_RENDER_AMOUNT, m_ModelMatrices };
 
 		//Chunk ch{ Position(0,0,0) };
+
 		//ch.initialize();
 		//ch.generate();
 		//ch.updateRender();
@@ -111,32 +129,24 @@ namespace ul {
 		Texture tex{ "cobblestone.png" };
 
 		shader.use();
-		shader.setInt("texture1", 0);
+		shader.setInt("texture1", 1);
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ScreenWidth / (float)m_ScreenHeight, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
 
 		linf << "Done, Generating GPUs draw commands\n";
 
-		IndirectDrawCmd testDraw;
-		testDraw.vertexCount = 36;
-		testDraw.instanceCount = DEBUG_RENDER_AMOUNT;
-		testDraw.firstIndex = 0;
-		testDraw.baseInstance = 0;
-		testDraw.baseVertex = 0;
-
-
-		unsigned indirectBuffer;
-
-		glGenBuffers(1, &indirectBuffer);
-		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirectBuffer);
-		glBufferData(GL_DRAW_INDIRECT_BUFFER, sizeof(testDraw), &testDraw, GL_STATIC_DRAW);
-		
+		tbm.genDrawCommand();
+		//cube.genDrawCommand();
 		
 		linf << "Done, entering main render loop\n";
 
 		int currentS = 0;
 		unsigned frameCount = 0;
+		unsigned lastFps = 0;
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, tex.getId());
 
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();
@@ -151,8 +161,10 @@ namespace ul {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, tex.getId());
+			txt.startRender();
+			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
+			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
+			txt.endRender();
 
 			shader.use();
 
@@ -161,18 +173,22 @@ namespace ul {
 
 			if ((int)(currentFrame + 1.f) > currentS) {
 				currentS = currentFrame + 1.f;
-				linf << frameCount << "FPS\n";
+				//linf << frameCount << "FPS\n";
+				lastFps = frameCount;
 				frameCount = 0;
 			}
 
-			glBindVertexArray(cube.getVAO()/*Block::s_BlockMesh.getVAO()*/);
+			//glBindVertexArray(cube.getVAO()/*Block::s_BlockMesh.getVAO()*/);
+			glBindVertexArray(tbm.getVAO());
 
-			glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0);
+			glDrawArraysIndirect(GL_TRIANGLES, 0);
+			//glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0);
 
 			glfwSwapBuffers(m_Window);
 			glfwPollEvents();
 		}
 
+		//delete buf;
 		freeGlfw();
 		return 0;
 	}

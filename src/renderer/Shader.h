@@ -31,6 +31,10 @@ namespace ul {
 			glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 		}
 
+		inline void setVec3(const std::string& name, const glm::vec3& vec) const noexcept {
+			glUniform3f(glGetUniformLocation(m_ProgramID, name.c_str()), vec.x, vec.y, vec.z);
+		}
+
 	private:
 		unsigned int m_ProgramID;
 	};
