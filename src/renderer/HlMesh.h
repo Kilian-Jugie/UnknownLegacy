@@ -3,6 +3,8 @@
 #include "Mesh.h"
 
 namespace ul {
+	class Chunk;
+
 	class HlMesh {
 	public:
 		struct vertex {
@@ -25,7 +27,7 @@ namespace ul {
 			DOWN
 		};
 
-		std::vector<vertex> get(Faces face) const {
+		const std::vector<vertex>& get(Faces face) const {
 			return m_Faces[(unsigned)face];
 		}
 
@@ -42,6 +44,8 @@ namespace ul {
 			auto d{ vertexArrayAsDualArray(get(face)) };
 			return Mesh(d.first.data(), d.first.size() * sizeof(float), d.second.data(), d.second.size(), nullptr, 0);
 		}
+
+		std::vector<vertex> cull(const Chunk& chunk, glm::vec3 pos) const;
 
 		//DEBUG TO REMOVE
 		Mesh toMesh() {

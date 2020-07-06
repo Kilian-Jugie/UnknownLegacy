@@ -25,6 +25,7 @@
     <ClCompile Include="src\filesystem\UlFilesystem.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\renderer\Camera.cpp" />
+    <ClCompile Include="src\renderer\HlMesh.cpp" />
     <ClCompile Include="src\renderer\Mesh.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
     <ClCompile Include="src\renderer\Shader.cpp" />

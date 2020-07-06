@@ -164,6 +164,7 @@ namespace ul {
 			txt.startRender();
 			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
 			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
+			txt.render(fmt::format("Vertices: {}", tbm.getVerticesSize()/sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
 			txt.endRender();
 
 			shader.use();
