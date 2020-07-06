@@ -1,5 +1,6 @@
 [INFO] 
-[INFO] Initializing GLFW...
+[INFO] tobeculled
+ GLFW...
 [INFO] Initialization done !
 [INFO] Done, compiling shaders
 [INFO] Vertex path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\vertex.glsl

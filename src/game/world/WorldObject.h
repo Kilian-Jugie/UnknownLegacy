@@ -7,7 +7,7 @@ namespace ul {
 
 	public:
 		template<typename _StrTy, typename = std::enable_if_t<std::is_constructible_v<ulString, _StrTy>>>
-		WorldObject(_StrTy&& name, const HlMesh& mesh) noexcept : GameObject(std::forward<_StrTy>(name)), m_Mesh(mesh) {}
+		WorldObject(_StrTy&& name, const HlMesh& mesh, bool isOpaque=true) noexcept : GameObject(std::forward<_StrTy>(name)), m_Mesh(mesh), m_IsOpaque(isOpaque) {}
 		
 		/*
 			onLoaded
@@ -18,6 +18,13 @@ namespace ul {
 			return m_Mesh;
 		}
 
+		bool isOpaque() const {
+			return m_IsOpaque;
+		}
+
 		const HlMesh& m_Mesh;
+
+	private:
+		bool m_IsOpaque;
 	};
 }

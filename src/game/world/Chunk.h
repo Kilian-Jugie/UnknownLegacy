@@ -16,7 +16,11 @@ namespace ul {
 
 	class Chunk {
 	public:
-		Chunk(const Position& pos) : m_Position{ pos }, block{"block", gBlockHlMesh} {
+		static constexpr size_t CHUNK_SIZE_X = 16;
+		static constexpr size_t CHUNK_SIZE_Z = 16;
+		static constexpr size_t CHUNK_SIZE_Y = 256;
+
+		Chunk(const Position& pos) : m_Position{ pos }, block{"block", gBlockHlMesh}, air("air", gBlockHlMesh, false) {
 			initBlocks();
 		}
 
@@ -25,21 +29,29 @@ namespace ul {
 		}
 
 		void initBlocks() {
-			for (int x(0); x < 16; ++x) {
-				for (int y(0); y < 16; ++y) {
-					for (int z(0); z < 16; ++z) {
-						blocks[x][y][z] = new InstancedObject(glm::mat4(), block);
-						glm::translate(blocks[x][y][z]->model, { x,y,z });
-						glm::scale(blocks[x][y][z]->model, { 0.5f, 0.5f, 0.5f });
+			for (int x(0); x < CHUNK_SIZE_X; ++x) {
+				for (int y(0); y < CHUNK_SIZE_Y; ++y) {
+					for (int z(0); z < CHUNK_SIZE_Z; ++z) {
+						if (x == 10 && y == 10 && z == 10) {
+							
+							blocks[x][y][z] = new InstancedObject(glm::mat4(), air);
+							glm::translate(blocks[x][y][z]->model, { x,y,z });
+							glm::scale(blocks[x][y][z]->model, { 0.5f, 0.5f, 0.5f });
+						}
+						else {
+							blocks[x][y][z] = new InstancedObject(glm::mat4(), block);
+							glm::translate(blocks[x][y][z]->model, { x,y,z });
+							glm::scale(blocks[x][y][z]->model, { 0.5f, 0.5f, 0.5f });
+						}
 					}
 				}
 			}
 		}
 
 		void deleteBlocks() {
-			for (int x(0); x < 16; ++x) {
-				for (int y(0); y < 16; ++y) {
-					for (int z(0); z < 16; ++z) {
+			for (int x(0); x < CHUNK_SIZE_X; ++x) {
+				for (int y(0); y < CHUNK_SIZE_Y; ++y) {
+					for (int z(0); z < CHUNK_SIZE_Z; ++z) {
 						delete blocks[x][y][z];
 					}
 				}
@@ -67,13 +79,16 @@ namespace ul {
 			return vec;
 		}
 
+		const InstancedObject& at(glm::ivec3 pos) const {
+			return *blocks[pos.x][pos.y][pos.z];
+		}
+
 		Mesh toMesh(HlMesh* blockMesh) {
-			
 			std::vector<HlMesh::vertex> vertices;
 			std::vector<HlMesh::vertex> tmpV;
-			for (int x(0); x < 16; ++x) {
-				for (int y(0); y < 16; ++y) {
-					for (int z(0); z < 16; ++z) {
+			for (int x(0); x < CHUNK_SIZE_X; ++x) {
+				for (int y(0); y < CHUNK_SIZE_Y; ++y) {
+					for (int z(0); z < CHUNK_SIZE_Z; ++z) {
 						tmpV = block.getMesh().cull(*this, { x,y,z });
 						if (!tmpV.empty()) {
 							float tr[] = { x,y,z };
@@ -83,17 +98,15 @@ namespace ul {
 					}
 				}
 			}
-
 			auto vert = HlMesh::vertexArrayAsDualArray(vertices);
-			
-
 			return Mesh(vert.first.data(), vert.first.size() * sizeof(float), vert.second.data(), vert.second.size()*sizeof(float), nullptr, 0);
 		}
 
 	private:
 		const Position m_Position;
-		InstancedObject* blocks[16][16][16];
+		InstancedObject* blocks[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z];
 		WorldObject block;
+		WorldObject air;
 	};
 
 
