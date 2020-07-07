@@ -63,9 +63,11 @@ namespace ul {
 #endif // 
 
 #endif // UL_ENABLE_ANTI_ALIASING
-
-
-
+#if GL_EXT_texture_filter_anisotropic
+#define UL_ANISOTROPIC_FILTER 16
+#else
+#define UL_ANISOTROPIC_FILTER 0
+#endif // DEBUG
 
 		linf << "Initialization done !\n";
 		return 0;
@@ -82,7 +84,7 @@ namespace ul {
 
 		//linf << "Loading model matrices\n";
 		loadModelMatrices();
-		linf << "Done, compiling shaders\n";
+		linf << "Compiling shaders\n";
 		
 		//glEnable(GL_CULL_FACE);
 		//glCullFace(GL_BACK);
@@ -145,8 +147,10 @@ namespace ul {
 		unsigned frameCount = 0;
 		unsigned lastFps = 0;
 
+		
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex.getId());
+		
 
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();

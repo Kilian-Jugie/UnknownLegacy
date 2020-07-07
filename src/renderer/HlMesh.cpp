@@ -15,10 +15,6 @@ namespace ul {
 			nrvo.insert(nrvo.end(), v.begin(), v.end());
 			status |= UL_FACE_BIT(face);
 		};
-
-		if (pos.x == 10 && pos.y == 10 && pos.z == 10) {
-			linf << "tobeculled\n";
-		}
 		
 		if (pos.x == 0) {
 			getFace(Faces::WEST);

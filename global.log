@@ -1,8 +1,7 @@
 [INFO] 
-[INFO] tobeculled
- GLFW...
+[INFO] Initializing GLFW...
 [INFO] Initialization done !
-[INFO] Done, compiling shaders
+[INFO] Compiling shaders
 [INFO] Vertex path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\vertex.glsl
 [INFO] Fragment path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\fragment.glsl
 [INFO] Done, filling VAO, VBO, (EBO)
