@@ -146,7 +146,6 @@ namespace ul {
 		int currentS = 0;
 		unsigned frameCount = 0;
 		unsigned lastFps = 0;
-
 		
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, tex.getId());
@@ -160,20 +159,31 @@ namespace ul {
 
 			//physicManager.simulate(m_DeltaTime);
 
+			
+
 			processInput(m_Window);
 
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			glm::mat4 view = m_Camera->getViewMatrix();
+			std::string cardinal{ "" };
+			if (std::roundf(view[2][2]) == -1) cardinal.push_back('S');
+			else if (std::roundf(view[2][2]) == 1) cardinal.push_back('N');
+			if (std::roundf(view[0][2]) == -1) cardinal.push_back('W');
+			else if (std::roundf(view[0][2]) == 1) cardinal.push_back('E');
+			if (std::roundf(view[1][2]) == -1) cardinal.push_back('U');
+			else if (std::roundf(view[1][2]) == 1) cardinal.push_back('D');
+
+
 			txt.startRender();
 			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
 			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
 			txt.render(fmt::format("Vertices: {}", tbm.getVerticesSize()/sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
+			txt.render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
 			txt.endRender();
 
 			shader.use();
-
-			glm::mat4 view = m_Camera->getViewMatrix();
 			shader.setMat4("view", view);
 
 			if ((int)(currentFrame + 1.f) > currentS) {
@@ -186,8 +196,8 @@ namespace ul {
 			//glBindVertexArray(cube.getVAO()/*Block::s_BlockMesh.getVAO()*/);
 			glBindVertexArray(tbm.getVAO());
 
-			glDrawArraysIndirect(GL_TRIANGLES, 0);
-			//glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_SHORT, 0);
+			//glDrawArraysIndirect(GL_TRIANGLES, 0);
+			glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, 0);
 
 			glfwSwapBuffers(m_Window);
 			glfwPollEvents();

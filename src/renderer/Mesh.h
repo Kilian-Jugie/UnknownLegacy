@@ -10,7 +10,7 @@ namespace ul {
 
 		using buffer_t = unsigned int;
 
-		Mesh(const float* vertices, GLuint verticesSize, const float* texCoords, GLuint textcoordsSize, const GLushort* indices,
+		Mesh(const float* vertices, GLuint verticesSize, const float* texCoords, GLuint textcoordsSize, const unsigned* indices,
 			GLuint indicesSize)  noexcept
 			: m_Vertices{ vertices }, m_TexCoords{ texCoords }, m_TexCoordsSize{ textcoordsSize },
 			m_Indices{ indices }, m_VAO{ 0 }, m_VBO{ 0 }, m_EBO{ 0 },
@@ -111,7 +111,7 @@ namespace ul {
 
 		const float* m_Vertices;
 		const float* m_TexCoords;
-		const GLushort* m_Indices;
+		const unsigned* m_Indices;
 		const GLuint m_VerticesSize, m_IndicesSize, m_TexCoordsSize;
 	};
 }

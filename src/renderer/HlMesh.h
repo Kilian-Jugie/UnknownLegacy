@@ -12,7 +12,11 @@ namespace ul {
 			float tex[2];
 		};
 
-		HlMesh(std::vector<std::vector<vertex>> faces) : m_Faces{ std::move(faces) }, eqVertices{  } {}
+		//First: Vertices; Second: Indices
+		using face_t = std::pair<std::vector<vertex>, std::vector<unsigned>>;
+		using arrFaces_t = std::vector<face_t>;
+
+		HlMesh(arrFaces_t faces) : m_Faces{ std::move(faces) }, eqVertices{  } {}
 
 		~HlMesh() {
 			//if (eqVertices) delete[] eqVertices;
@@ -27,7 +31,7 @@ namespace ul {
 			DOWN
 		};
 
-		const std::vector<vertex>& get(Faces face) const {
+		const face_t& get(Faces face) const {
 			return m_Faces[(unsigned)face];
 		}
 
@@ -40,18 +44,18 @@ namespace ul {
 			return ret;
 		}
 
-		Mesh getAsMesh(Faces face) const {
-			auto d{ vertexArrayAsDualArray(get(face)) };
+		/*Mesh getAsMesh(Faces face) const {
+			auto d{ vertexArrayAsDualArray(get(face).first) };
 			return Mesh(d.first.data(), d.first.size() * sizeof(float), d.second.data(), d.second.size(), nullptr, 0);
-		}
+		}*/
 
-		std::vector<vertex> cull(const Chunk& chunk, glm::vec3 pos) const;
+		std::pair<std::vector<vertex>, std::vector<unsigned>> cull(const Chunk& chunk, glm::vec3 pos) const;
 
 		//DEBUG TO REMOVE
-		Mesh toMesh() {
+		/*Mesh toMesh() {
 			unsigned index = 0;
 			for (auto it: m_Faces) {
-				for (auto fit: it) {
+				for (auto fit: it.first) {
 					eqVertices.first.insert(eqVertices.first.end(), std::begin(fit.pos), std::end(fit.pos));
 					eqVertices.second.insert(eqVertices.second.end(), std::begin(fit.tex), std::end(fit.tex));
 				}
@@ -59,11 +63,11 @@ namespace ul {
 
 			//GLushort indices[] = {};
 			return std::move(Mesh(eqVertices.first.data(), eqVertices.first.size()*sizeof(float), eqVertices.second.data(), eqVertices.second.size()*sizeof(float), nullptr, 0));
-		}
+		}*/
 
 	private:
 		std::pair<std::vector<float>, std::vector<float>> eqVertices;
 
-		std::vector<std::vector<vertex>> m_Faces;
+		arrFaces_t m_Faces;
 	};
 }

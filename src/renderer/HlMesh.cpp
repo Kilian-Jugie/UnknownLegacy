@@ -7,12 +7,16 @@
 
 namespace ul {
 	//Ulgly but fastest method ?
-	std::vector<HlMesh::vertex> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
+	std::pair<std::vector<HlMesh::vertex>, std::vector<unsigned>> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
 		unsigned status = 0;
-		std::vector<vertex> nrvo;
+		static unsigned maxIndice = 0;
+		std::pair<std::vector<vertex>, std::vector<unsigned>> nrvo;
 		static auto getFace = [&nrvo, &status, this](Faces face) {
-			auto& v = this->get(face);
-			nrvo.insert(nrvo.end(), v.begin(), v.end());
+			auto v = this->get(face); //We need a copy to remove const qualifier
+			nrvo.first.insert(nrvo.first.end(), v.first.begin(), v.first.end());
+			for (auto& it : v.second) it += maxIndice;
+			nrvo.second.insert(nrvo.second.end(), v.second.begin(), v.second.end());
+			maxIndice += v.first.size();
 			status |= UL_FACE_BIT(face);
 		};
 		

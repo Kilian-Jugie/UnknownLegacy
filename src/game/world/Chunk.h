@@ -85,21 +85,23 @@ namespace ul {
 
 		Mesh toMesh(HlMesh* blockMesh) {
 			std::vector<HlMesh::vertex> vertices;
-			std::vector<HlMesh::vertex> tmpV;
+			std::vector<unsigned> indices;
+			std::pair<std::vector<HlMesh::vertex>, std::vector<unsigned>> tmpV;
 			for (int x(0); x < CHUNK_SIZE_X; ++x) {
 				for (int y(0); y < CHUNK_SIZE_Y; ++y) {
 					for (int z(0); z < CHUNK_SIZE_Z; ++z) {
 						tmpV = block.getMesh().cull(*this, { x,y,z });
-						if (!tmpV.empty()) {
+						if (!tmpV.first.empty()) {
 							float tr[] = { x,y,z };
-							tmpV = translate(tmpV, tr);
-							vertices.insert(vertices.end(), tmpV.begin(), tmpV.end());
+							tmpV.first = translate(tmpV.first, tr);
+							vertices.insert(vertices.end(), tmpV.first.begin(), tmpV.first.end());
+							indices.insert(indices.end(), tmpV.second.begin(), tmpV.second.end());
 						}
 					}
 				}
 			}
 			auto vert = HlMesh::vertexArrayAsDualArray(vertices);
-			return Mesh(vert.first.data(), vert.first.size() * sizeof(float), vert.second.data(), vert.second.size()*sizeof(float), nullptr, 0);
+			return Mesh(vert.first.data(), vert.first.size() * sizeof(float), vert.second.data(), vert.second.size()*sizeof(float), indices.data(), indices.size()*sizeof(unsigned));
 		}
 
 	private:
