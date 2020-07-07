@@ -6,7 +6,8 @@
 #define UL_HAS_BIT(st, f) (st & UL_FACE_BIT(f))
 
 namespace ul {
-	//Ulgly but fastest method ?
+	
+	//Instead of chunk, we should pass a sector of chunks
 	std::pair<std::vector<HlMesh::vertex>, std::vector<unsigned>> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
 		unsigned status = 0;
 		static unsigned maxIndice = 0;
@@ -20,6 +21,7 @@ namespace ul {
 			status |= UL_FACE_BIT(face);
 		};
 		
+		//Should be removed to check surrounding chunks
 		if (pos.x == 0) {
 			getFace(Faces::WEST);
 		}
@@ -39,6 +41,10 @@ namespace ul {
 			getFace(Faces::NORTH);
 		}
 		
+		//Ulgly but fastest method ?
+		//Chunk must be replaced with another structure to check surrounding chunks
+		//How to deal if surrounding chunk is not loaded ? (-> consider the block opaque
+		//because this limit should never be visible)
 		if (!UL_HAS_BIT(status, Faces::WEST)) {
 			if (!chunk.at({ pos.x - 1, pos.y, pos.z }).obj.isOpaque()) {
 				getFace(Faces::WEST);

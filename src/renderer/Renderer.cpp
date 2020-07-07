@@ -42,7 +42,7 @@ namespace ul {
 		glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 		glfwSetCursorPosCallback(m_Window, mouse_callback);
 		glfwSetScrollCallback(m_Window, scroll_callback);
-		glfwSwapInterval(0);
+		glfwSwapInterval(1); //VSync
 
 		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -50,6 +50,7 @@ namespace ul {
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			lfat << "Failed to initialize GLAD\n";
+			glfwTerminate();
 			return -1;
 		}
 
@@ -64,7 +65,7 @@ namespace ul {
 
 #endif // UL_ENABLE_ANTI_ALIASING
 #if GL_EXT_texture_filter_anisotropic
-#define UL_ANISOTROPIC_FILTER 16
+#define UL_ANISOTROPIC_FILTER 1
 #else
 #define UL_ANISOTROPIC_FILTER 0
 #endif // DEBUG
@@ -86,7 +87,7 @@ namespace ul {
 		loadModelMatrices();
 		linf << "Compiling shaders\n";
 		
-		//glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
 		//glCullFace(GL_BACK);
 		//glFrontFace(GL_CCW);
 		//glEnable(GL_CULL_FACE);
