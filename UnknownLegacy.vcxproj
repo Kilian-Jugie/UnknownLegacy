@@ -31,6 +31,7 @@
     <ClCompile Include="src\renderer\Shader.cpp" />
     <ClCompile Include="src\renderer\TextRenderer.cpp" />
     <ClCompile Include="src\renderer\Texture.cpp" />
+    <ClCompile Include="src\renderer\TextureArray.cpp" />
     <ClCompile Include="src\ul.cpp" />
     <ClCompile Include="src\utils\Error.cpp" />
     <ClCompile Include="src\utils\ErrorManager.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="src\game\world\WorldObject.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\kPreprocessor.h" />
+    <ClInclude Include="src\maths\Maths.h" />
     <ClInclude Include="src\maths\Vec.h" />
     <ClInclude Include="src\renderer\Camera.h" />
     <ClInclude Include="src\renderer\HlMesh.h" />
@@ -67,6 +69,7 @@
     <ClInclude Include="src\renderer\StaticVertices.h" />
     <ClInclude Include="src\renderer\TextRenderer.h" />
     <ClInclude Include="src\renderer\Texture.h" />
+    <ClInclude Include="src\renderer\TextureArray.h" />
     <ClInclude Include="src\ul.h" />
     <ClInclude Include="src\utils\debug.h" />
     <ClInclude Include="src\utils\Error.h" />

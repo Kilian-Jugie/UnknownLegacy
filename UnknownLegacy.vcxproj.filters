@@ -123,6 +123,9 @@
     <ClCompile Include="src\renderer\HlMesh.cpp">
       <Filter>Fichiers sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\TextureArray.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ul.h">
@@ -256,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="src\renderer\TextRenderer.h">
       <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\TextureArray.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\maths\Maths.h">
+      <Filter>Fichiers d%27en-tête\maths</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

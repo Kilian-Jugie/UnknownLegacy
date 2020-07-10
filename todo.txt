@@ -1,14 +1,9 @@
 bindless textures (better)
 textures array
 ssbo
-ubo
+ubo 
 
-
-Vulkan ?
-
-Shader class: perfect forwarding
 Renderer:
-	- Model matrices loading
 	- Textures loading & mapping
 	- Multimesh multidraw
 	- Move timers on other thread

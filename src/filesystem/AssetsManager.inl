@@ -46,6 +46,10 @@ namespace ul {
 		return findInFolder(m_Root / m_Folders[fid].second, file.filename());
 	}
 
+	inline AssetsManager::path_t AssetsManager::getPath(id_t fid) {
+		return m_Root / m_Folders[fid].second;
+	}
+
 	inline AssetsManager::path_t AssetsManager::findInFolder(const path_t& folder, const path_t::string_type& filename) {
 		static path_t empt{};
 		for (const auto& it : std::filesystem::directory_iterator(folder)) {

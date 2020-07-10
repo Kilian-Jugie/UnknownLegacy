@@ -32,6 +32,7 @@ namespace ul {
 		path_t getPath(const path_t& file);
 		path_t getPath(const path_t& file, const alias_t& falias);
 		path_t getPath(const path_t& file, id_t fid);
+		path_t getPath(id_t fid);
 
 	private:
 		path_t findInFolder(const path_t& folder, const path_t::string_type& filename);

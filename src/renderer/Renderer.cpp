@@ -5,6 +5,7 @@
 #include "../ul.h"
 #include "../utils/StringUtils.h"
 #include "TextRenderer.h"
+#include "TextureArray.h"
 #include <fmt/format.h>
 
 namespace ul {
@@ -105,7 +106,6 @@ namespace ul {
 
 		TextRenderer txt;
 		txt.initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
-
 		
 		Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeTexCoords, sizeof(gCubeTexCoords), nullptr, 0/*sizeof(gCubeIndices)*/};
 
@@ -129,10 +129,15 @@ namespace ul {
 
 		linf << "Done, loading texture\n";
 
-		Texture tex{ "cobblestone.png" };
+		auto texsLocationId = assetManager.addFolder("textures");
+		//Texture tex{ wtos(assetManager.getPath("atlas.png", texsLocationId)).c_str() };
+		TextureArray textures{ 16,16 };
+		auto p = assetManager.getPath(texsLocationId);
+		textures.addFolder(p);
+		textures.load();
 
 		shader.use();
-		shader.setInt("texture1", 1);
+		//shader.setInt("texture1", 1);
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ScreenWidth / (float)m_ScreenHeight, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
@@ -148,9 +153,10 @@ namespace ul {
 		unsigned frameCount = 0;
 		unsigned lastFps = 0;
 		
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, tex.getId());
-		
+		//glActiveTexture(GL_TEXTURE1);
+		shader.setInt("texture1", textures.getTextureUnit());
+		glBindTextureUnit(textures.getTextureUnit(), textures.getId());
+		shader.setInt("TexId", 0);
 
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();
