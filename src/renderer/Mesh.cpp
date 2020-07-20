@@ -52,53 +52,21 @@ namespace ul {
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndicesSize, m_Indices.data(), GL_STATIC_DRAW);
 
 		m_ArrayIndex = setupArrayBuffer(0);
-
-		//glBindBuffer(GL_ARRAY_BUFFER, m_ObjBuffer);
-		//glBufferData(GL_ARRAY_BUFFER, m_ModelsCount * sizeof(glm::mat4), &((*m_Models)[0]), GL_STATIC_DRAW);
-
-		//setupModelAttribsArrays(e);
-
 	}
 	
 	GLuint Mesh::setupArrayBuffer(GLuint begin) noexcept {
 		glGenBuffers(1, &m_VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		/*glBufferData(GL_ARRAY_BUFFER, m_VerticesSize, m_Vertices.data(), GL_STATIC_DRAW);
 
-		glVertexAttribPointer(begin, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(begin);
-
-		glGenBuffers(1, &m_TXC);
-		glBindBuffer(GL_ARRAY_BUFFER, m_TXC);
-		glBufferData(GL_ARRAY_BUFFER, m_TexCoordsSize, m_TexCoords.data(), GL_STATIC_DRAW);
-
-		
-		glVertexAttribPointer(++begin, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(begin);
-
-		glGenBuffers(1, &m_TID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_TID);
-		glBufferData(GL_ARRAY_BUFFER, m_TexIdsSize, m_TexIds.data(), GL_STATIC_DRAW);
-
-		//glEnableVertexAttribArray(++begin);
-		
-		glVertexAttribPointer(++begin, 1, GL_INT, GL_FALSE, sizeof(int), (void*)0);
-		glEnableVertexAttribArray(begin);*/
-
-		glm::mat4 model = glm::mat4(1.f);
+		/*glm::mat4 model = glm::mat4(1.f);
 		model = glm::translate(model, glm::vec3((float)0, 0.0f, (float)0));
-		model = glm::scale(model, glm::vec3(0.5f));
-
-		m_TexIds[0] = 2;
-		m_TexIds[1] = 2;
-		m_TexIds[2] = 2;
-		m_TexIds[3] = 2;
+		model = glm::scale(model, glm::vec3(0.5f));*/
 
 		glBufferData(GL_ARRAY_BUFFER, m_VerticesSize + m_TexCoordsSize + m_TexIdsSize + sizeof(glm::mat4), 0, GL_STATIC_DRAW);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, m_VerticesSize, m_Vertices.data());
 		glBufferSubData(GL_ARRAY_BUFFER, m_VerticesSize, m_TexCoordsSize, m_TexCoords.data());
 		glBufferSubData(GL_ARRAY_BUFFER, m_VerticesSize + m_TexCoordsSize, m_TexIdsSize, m_TexIds.data());
-		glBufferSubData(GL_ARRAY_BUFFER, m_VerticesSize + m_TexCoordsSize + m_TexIdsSize, sizeof(glm::mat4), &model);
+		
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 		glEnableVertexAttribArray(0);
@@ -109,21 +77,7 @@ namespace ul {
 		glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)(m_VerticesSize+m_TexCoordsSize));
 		glEnableVertexAttribArray(2);
 
-		glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_VerticesSize + m_TexCoordsSize + m_TexIdsSize));
-		glVertexAttribDivisor(3, 1);
-		glEnableVertexAttribArray(3);
 		
-		glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_VerticesSize + m_TexCoordsSize + m_TexIdsSize+sizeof(glm::vec4)));
-		glVertexAttribDivisor(4, 1);
-		glEnableVertexAttribArray(4);
-
-		glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_VerticesSize + m_TexCoordsSize + m_TexIdsSize+2 * sizeof(glm::vec4)));
-		glVertexAttribDivisor(5, 1);
-		glEnableVertexAttribArray(5);
-
-		glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_VerticesSize + m_TexCoordsSize + m_TexIdsSize+3 * sizeof(glm::vec4)));
-		glVertexAttribDivisor(6, 1);
-		glEnableVertexAttribArray(6);
 
 		return ++begin;
 	}

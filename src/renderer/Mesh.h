@@ -50,6 +50,10 @@ namespace ul {
 			return m_VerticesSize;
 		}
 
+		inline int getModelBufferOffset() const noexcept {
+			return m_VerticesSize + m_TexCoordsSize + m_TexIdsSize;
+		}
+
 		void genDrawCommand();
 
 	protected:
