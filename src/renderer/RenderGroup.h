@@ -8,14 +8,14 @@ namespace ul {
 			const glm::mat4* models) noexcept :
 			m_Mesh{ std::move(mesh) }, m_Count{ count }, m_Models{ models }
 			, m_InstanceBuffer{ 0 } {
-			configure(m_Mesh.getArrayIndex());
+			//configure(m_Mesh.getArrayIndex());
 		}
 
 		RenderGroup(const Mesh& mesh, GLuint count,
 			const glm::mat4* models) noexcept :
 			m_Mesh{ mesh }, m_Count{ count }, m_Models{ models }
 			, m_InstanceBuffer{ 0 } {
-			configure(m_Mesh.getArrayIndex());
+			//configure(m_Mesh.getArrayIndex());
 		}
 
 		inline const GLuint getCount() const noexcept {

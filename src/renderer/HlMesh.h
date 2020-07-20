@@ -1,19 +1,39 @@
 #pragma once
 #include <vector>
+#include <tuple>
 #include "Mesh.h"
 
 namespace ul {
 	class Chunk;
+	class HlMesh;
+
+	struct vertex {
+		float pos[3];
+		float tex[2];
+	};
+	
+	struct HlMeshFace {
+		using vertices_t = std::vector<vertex>;
+		using indices_t = std::vector<unsigned>;
+		using texid_t = unsigned;
+
+		vertices_t vertices;
+		indices_t indices;
+		texid_t texId;
+
+		HlMeshFace(vertices_t v, indices_t i): vertices{v}, indices{i}, texId{0} {}
+		HlMeshFace(HlMeshFace&&) = default;
+		HlMeshFace(const HlMeshFace&) = default;
+
+		HlMeshFace& operator=(const HlMeshFace&) = default;
+	};
 
 	class HlMesh {
 	public:
-		struct vertex {
-			float pos[3];
-			float tex[2];
-		};
+		
 
 		//First: Vertices; Second: Indices
-		using face_t = std::pair<std::vector<vertex>, std::vector<unsigned>>;
+		using face_t = HlMeshFace;
 		using arrFaces_t = std::vector<face_t>;
 
 		HlMesh(arrFaces_t faces) : m_Faces{ std::move(faces) }, eqVertices{  } {}
@@ -49,7 +69,7 @@ namespace ul {
 			return Mesh(d.first.data(), d.first.size() * sizeof(float), d.second.data(), d.second.size(), nullptr, 0);
 		}*/
 
-		std::pair<std::vector<vertex>, std::vector<unsigned>> cull(const Chunk& chunk, glm::vec3 pos) const;
+		std::vector<HlMeshFace> cull(const Chunk& chunk, glm::vec3 pos) const;
 
 		//DEBUG TO REMOVE
 		/*Mesh toMesh() {

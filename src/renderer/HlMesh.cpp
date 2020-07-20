@@ -8,16 +8,15 @@
 namespace ul {
 	
 	//Instead of chunk, we should pass a sector of chunks
-	std::pair<std::vector<HlMesh::vertex>, std::vector<unsigned>> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
+	std::vector<HlMeshFace> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
 		unsigned status = 0;
 		static unsigned maxIndice = 0;
-		std::pair<std::vector<vertex>, std::vector<unsigned>> nrvo;
+		std::vector<HlMeshFace> nrvo{  };
 		static auto getFace = [&nrvo, &status, this](Faces face) {
 			auto v = this->get(face); //We need a copy to remove const qualifier
-			nrvo.first.insert(nrvo.first.end(), v.first.begin(), v.first.end());
-			for (auto& it : v.second) it += maxIndice;
-			nrvo.second.insert(nrvo.second.end(), v.second.begin(), v.second.end());
-			maxIndice += v.first.size();
+			for (auto& it : v.indices) it += maxIndice;
+			maxIndice += v.vertices.size();
+			nrvo.emplace_back(std::move(v));
 			status |= UL_FACE_BIT(face);
 		};
 		

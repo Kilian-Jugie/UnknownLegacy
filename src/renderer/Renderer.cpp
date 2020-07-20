@@ -107,7 +107,7 @@ namespace ul {
 		TextRenderer txt;
 		txt.initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
 		
-		Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeTexCoords, sizeof(gCubeTexCoords), nullptr, 0/*sizeof(gCubeIndices)*/};
+		//Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeTexCoords, sizeof(gCubeTexCoords), nullptr, 0/*sizeof(gCubeIndices)*/};
 
 		Chunk ch{ {0,0,0} };
 
@@ -132,8 +132,7 @@ namespace ul {
 		auto texsLocationId = assetManager.addFolder("textures");
 		//Texture tex{ wtos(assetManager.getPath("atlas.png", texsLocationId)).c_str() };
 		TextureArray textures{ 16,16 };
-		auto p = assetManager.getPath(texsLocationId);
-		textures.addFolder(p);
+		textures.addFolder(assetManager.getPath(texsLocationId));
 		textures.load();
 
 		shader.use();
@@ -156,7 +155,7 @@ namespace ul {
 		//glActiveTexture(GL_TEXTURE1);
 		shader.setInt("texture1", textures.getTextureUnit());
 		glBindTextureUnit(textures.getTextureUnit(), textures.getId());
-		shader.setInt("TexId", 0);
+		//shader.setInt("TexId", 2);
 
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();
@@ -165,8 +164,6 @@ namespace ul {
 			++frameCount;
 
 			//physicManager.simulate(m_DeltaTime);
-
-			
 
 			processInput(m_Window);
 
@@ -183,12 +180,12 @@ namespace ul {
 			else if (std::roundf(view[1][2]) == 1) cardinal.push_back('D');
 
 
-			txt.startRender();
+			/*txt.startRender();
 			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
 			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
 			txt.render(fmt::format("Vertices: {}", tbm.getVerticesSize()/sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
 			txt.render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
-			txt.endRender();
+			txt.endRender();*/
 
 			shader.use();
 			shader.setMat4("view", view);

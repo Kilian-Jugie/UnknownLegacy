@@ -13,7 +13,7 @@ int main() {
 
 	ul::UnknownLegacy& game = ul::UnknownLegacy::getInstance();
 	int r = static_cast<int>(game.start());
-	system("pause");
+	//system("pause");
 	return r;
 }
 

@@ -132,7 +132,7 @@ namespace ul {
 
 	HlMesh gBlockHlMesh{ HlMesh::arrFaces_t{
 				   //"North" facing South
-			HlMesh::face_t{ {
+			HlMesh::face_t{{
 					{ {-0.5f, -0.5f,  0.5f}, { 0.0f, 0.0f}}, //4
 					{{ 0.5f, -0.5f,  0.5f}, { 1.0f, 0.0f}}, //5
 					{{ 0.5f,  0.5f,  0.5f}, { 1.0f, 1.0f}}, //6
@@ -141,7 +141,7 @@ namespace ul {
 					{{-0.5f,  0.5f,  0.5f}, { 0.0f, 1.0f}}, //7
 					//{{-0.5f, -0.5f,  0.5f}, { 0.0f, 0.0f}} //4
 				}, 
-					{0,1,2,2,3,0} 
+					{0,1,2,2,3,0}
 					//"East" facing West
 			},  HlMesh::face_t{{
 					{{ 0.5f,  0.5f,  0.5f}, { 0.0f, 1.0f}}, //11

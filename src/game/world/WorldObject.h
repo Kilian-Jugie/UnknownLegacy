@@ -14,17 +14,16 @@ namespace ul {
 			onUnLoaded
 		*/
 
-		const HlMesh& getMesh() const {
+		inline const HlMesh& getMesh() const noexcept {
 			return m_Mesh;
 		}
 
-		bool isOpaque() const {
+		inline bool isOpaque() const noexcept {
 			return m_IsOpaque;
 		}
 
-		const HlMesh& m_Mesh;
-
 	private:
+		const HlMesh& m_Mesh;
 		bool m_IsOpaque;
 	};
 }

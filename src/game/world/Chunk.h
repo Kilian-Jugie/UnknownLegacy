@@ -70,7 +70,7 @@ namespace ul {
 			return ret;
 		}*/
 
-		std::vector<HlMesh::vertex>& translate(std::vector<HlMesh::vertex>& vec, float translation[3]) {
+		std::vector<vertex>& translate(std::vector<vertex>& vec, float translation[3]) {
 			for (auto& it : vec) {
 				for (size_t i(0); i < 3; ++i) {
 					it.pos[i] += translation[i];
@@ -84,24 +84,20 @@ namespace ul {
 		}
 
 		Mesh toMesh(HlMesh* blockMesh) {
-			std::vector<HlMesh::vertex> vertices;
-			std::vector<unsigned> indices;
-			std::pair<std::vector<HlMesh::vertex>, std::vector<unsigned>> tmpV;
+			std::vector<HlMeshFace> faces;
 			for (int x(0); x < CHUNK_SIZE_X; ++x) {
 				for (int y(0); y < CHUNK_SIZE_Y; ++y) {
 					for (int z(0); z < CHUNK_SIZE_Z; ++z) {
-						tmpV = block.getMesh().cull(*this, { x,y,z });
-						if (!tmpV.first.empty()) {
+						auto tmpFaces = block.getMesh().cull(*this, { x,y,z });
+						if (!tmpFaces.empty()) {
 							float tr[] = { x,y,z };
-							tmpV.first = translate(tmpV.first, tr);
-							vertices.insert(vertices.end(), tmpV.first.begin(), tmpV.first.end());
-							indices.insert(indices.end(), tmpV.second.begin(), tmpV.second.end());
+							for (auto& it : tmpFaces) it.vertices = translate(it.vertices, tr);
+							faces.insert(faces.end(), tmpFaces.begin(), tmpFaces.end());
 						}
 					}
 				}
 			}
-			auto vert = HlMesh::vertexArrayAsDualArray(vertices);
-			return Mesh(vert.first.data(), vert.first.size() * sizeof(float), vert.second.data(), vert.second.size()*sizeof(float), indices.data(), indices.size()*sizeof(unsigned));
+			return Mesh(faces);
 		}
 
 	private:
