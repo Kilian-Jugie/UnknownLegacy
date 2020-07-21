@@ -7,8 +7,6 @@ namespace ul {
 
 	class Shader {
 	public:
-		
-
 		Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
 
 		inline void use() const noexcept {

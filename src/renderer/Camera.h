@@ -34,69 +34,21 @@ namespace ul {
 		}
 
 		~Camera() {
-			//UL_PHYSX_RELEASE(m_Body);
 		}
 
-		/*Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) noexcept :
-			m_Front{ glm::vec3{0.0f, 0.0f, -1.0f} }, m_MovementSpeed{ SPEED }, m_MouseSensitivity{ SENSITIVITY }, m_Zoom{ ZOOM },
-			m_Position{ glm::vec3{posX, posY, posZ } }, m_WorldUp{ glm::vec3(upX, upY, upZ) }, m_Yaw{ yaw }, m_Pitch{ pitch } {
-			updateCameraVectors();
-		}*/
-
+		void processKeyboard(CameraMovement direction, float deltaTime) noexcept;
+		void processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) noexcept;
+		void processMouseScroll(float yoffset) noexcept;
 
 		inline glm::mat4 getViewMatrix() noexcept {
 			return glm::lookAt(m_Position, m_Position + m_Front, m_Up);
-			//return glm::lookAt();
-		}
-
-		void processKeyboard(CameraMovement direction, float deltaTime) noexcept {
-			float velocity = m_MovementSpeed * deltaTime;
-			if (direction == CameraMovement::FORWARD)
-				m_Position += m_Front * velocity;
-			if (direction == CameraMovement::BACKWARD)
-				m_Position -= m_Front * velocity;
-			if (direction == CameraMovement::LEFT)
-				m_Position -= m_Right * velocity;
-			if (direction == CameraMovement::RIGHT)
-				m_Position += m_Right * velocity;
-		}
-
-		void processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) noexcept {
-			xoffset *= m_MouseSensitivity;
-			yoffset *= m_MouseSensitivity;
-
-			m_Yaw += xoffset;
-			m_Pitch += yoffset;
-
-			if (constrainPitch) {
-				if (m_Pitch > 89.0f)
-					m_Pitch = 89.0f;
-				if (m_Pitch < -89.0f)
-					m_Pitch = -89.0f;
-			}
-
-			updateCameraVectors();
-		}
-
-		void processMouseScroll(float yoffset) noexcept {
-			if (m_Zoom >= 1.0f && m_Zoom <= 45.0f)
-				m_Zoom -= yoffset;
-			if (m_Zoom <= 1.0f)
-				m_Zoom = 1.0f;
-			if (m_Zoom >= 45.0f)
-				m_Zoom = 45.0f;
-
-			
 		}
 
 		inline glm::vec3 getPosition() {
-			//physx::PxTransform& pos = m_Body->getGlobalPose();
-			//return { pos.p.x, pos.p.y, pos.p.z };
 			return m_Position;
 		}
 
 		inline void setPosition(glm::vec3 v) {
-			//m_Body->setGlobalPose({ v.x, v.y, v.z });
 			m_Position = v;
 		}
 

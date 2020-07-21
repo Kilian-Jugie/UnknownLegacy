@@ -6,6 +6,7 @@
 
 #include "utils/debug.h"
 #include "renderer/Renderer.h"
+#include "game/world/WorldObject.h"
 
 
 int main() {
@@ -61,10 +62,11 @@ ul::ReturnCodes ul::UnknownLegacy::start() {
 
 	this->setupLocations();
 
-	//m_PhysicManager = &PhysicManager::get();
+	auto texsLocationId = m_AssetsManager.addFolder("textures");
+	Renderer::getInstance().getTextureManager().addFolder("ul", m_AssetsManager.getPath(texsLocationId));
 	
-	auto fRenderer = std::async(std::launch::async, &Renderer::render, &Renderer::getRenderer(),
-		std::ref(m_AssetsManager), m_ShaderLocationId/*, std::ref(*m_PhysicManager)*/); 
+	auto fRenderer = std::async(std::launch::async, &Renderer::render, &Renderer::getInstance(),
+		std::ref(m_AssetsManager), m_ShaderLocationId); 
 	linf << "Render started !\n";
 	int code = fRenderer.get();
 	linf << "Finished Render with code: " << code << "\n";

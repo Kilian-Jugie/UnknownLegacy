@@ -6,7 +6,7 @@
 #define UL_HAS_BIT(st, f) (st & UL_FACE_BIT(f))
 
 namespace ul {
-	
+
 	//Instead of chunk, we should pass a sector of chunks
 	std::vector<HlMeshFace> HlMesh::cull(const Chunk& chunk, glm::vec3 pos) const {
 		unsigned status = 0;
@@ -45,32 +45,32 @@ namespace ul {
 		//How to deal if surrounding chunk is not loaded ? (-> consider the block opaque
 		//because this limit should never be visible)
 		if (!UL_HAS_BIT(status, Faces::WEST)) {
-			if (!chunk.at({ pos.x - 1, pos.y, pos.z }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x - 1, pos.y, pos.z }).getWorldObject().isOpaque()) {
 				getFace(Faces::WEST);
 			}
 		}
 		if (!UL_HAS_BIT(status, Faces::EAST)) {
-			if (!chunk.at({ pos.x + 1, pos.y, pos.z }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x + 1, pos.y, pos.z }).getWorldObject().isOpaque()) {
 				getFace(Faces::EAST);
 			}
 		}
 		if (!UL_HAS_BIT(status, Faces::UP)) {
-			if (!chunk.at({ pos.x, pos.y-1, pos.z }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x, pos.y-1, pos.z }).getWorldObject().isOpaque()) {
 				getFace(Faces::UP);
 			}
 		}
 		if (!UL_HAS_BIT(status, Faces::DOWN)) {
-			if (!chunk.at({ pos.x, pos.y+1, pos.z }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x, pos.y+1, pos.z }).getWorldObject().isOpaque()) {
 				getFace(Faces::DOWN);
 			}
 		}
 		if (!UL_HAS_BIT(status, Faces::SOUTH)) {
-			if (!chunk.at({ pos.x, pos.y, pos.z-1 }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x, pos.y, pos.z-1 }).getWorldObject().isOpaque()) {
 				getFace(Faces::SOUTH);
 			}
 		}
 		if (!UL_HAS_BIT(status, Faces::NORTH)) {
-			if (!chunk.at({ pos.x, pos.y, pos.z+1 }).obj.isOpaque()) {
+			if (!chunk.at({ pos.x, pos.y, pos.z+1 }).getWorldObject().isOpaque()) {
 				getFace(Faces::NORTH);
 			}
 		}

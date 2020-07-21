@@ -4,6 +4,7 @@
 #include "filesystem/AssetsManager.h"
 #include "utils/ErrorManager.h"
 #include "utils/Logger.h"
+#include "game/GameObject.h"
 //#include "physic/PhysicManager.h"
 
 namespace ul {
@@ -51,6 +52,7 @@ namespace ul {
 		AssetsManager m_AssetsManager;
 		ErrorManager m_ErrorManager;
 		AssetsManager::id_t m_ShaderLocationId;
+		std::vector<GameObject> m_GameRegistry;
 		//PhysicManager* m_PhysicManager;
 		
 	};

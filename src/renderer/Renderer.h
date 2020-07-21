@@ -1,20 +1,15 @@
 #pragma once
 #include "Shader.h"
-//#include "Image.h"
 #include "Camera.h"
-#include "Texture.h"
 #include "StaticVertices.h"
 #include "../utils/Logger.h"
-//#include "../filesystem/AssetLocation.h"
+#include "TextureManager.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-
-//#include "../physic/PhysicManager.h"
 
 
 #define UL_ENABLE_ANTI_ALIASING
@@ -34,22 +29,16 @@ namespace ul {
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 	class Renderer {
-		
-
-		Renderer() : m_Window{ nullptr } {
-		}
-
-		
+		Renderer() : m_Window{ nullptr }, m_Camera{ nullptr }, m_TextureManager{ 16,16 } {}
 
 		using physcallback_t = void(*)(float,void*);
-
 	public:
 		Renderer(const Renderer&) = delete;
 		Renderer(Renderer&&) = delete;
 		Renderer& operator=(const Renderer&) = delete;
 		Renderer& operator=(Renderer&&) = delete;
 
-		static Renderer& getRenderer() {
+		static Renderer& getInstance() {
 			static Renderer r;
 			return r;
 		}
@@ -69,6 +58,10 @@ namespace ul {
 		void frameBufferSizeC(GLFWwindow* window, int width, int height);
 		void mouseC(GLFWwindow* window, double xpos, double ypos);
 		void scrollC(GLFWwindow* window, double xoffset, double yoffset);
+
+		inline TextureManager& getTextureManager() noexcept {
+			return m_TextureManager;
+		}
 
 		struct IndirectDrawCmd {
 			GLuint vertexCount;
@@ -104,6 +97,7 @@ namespace ul {
 			glm::mat4 m_ModelMatrices[DEBUG_RENDER_AMOUNT];
 
 			GLFWwindow* m_Window;
+			TextureManager m_TextureManager;
 	};
 
 	

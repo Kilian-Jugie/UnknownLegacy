@@ -1,138 +1,11 @@
 #pragma once
+#include "HlMeshFace.h"
 #include "HlMesh.h"
 
 namespace ul {
-
-	constexpr float gCubeVertices[] = {
-	 //Face 1 Triangle 1
-	-0.5f, -0.5f, -0.5f, //0
-	 0.5f, -0.5f, -0.5f, //1
-	 0.5f,  0.5f, -0.5f, //2
-	 //Face 1 Triangle 2
-	 0.5f,  0.5f, -0.5f, //2
-	-0.5f,  0.5f, -0.5f, //3
-	-0.5f, -0.5f, -0.5f, //0
-
-	 //Face 2 Triangle 1
-	-0.5f, -0.5f,  0.5f, //4
-	 0.5f, -0.5f,  0.5f, //5
-	 0.5f,  0.5f,  0.5f, //6
-	 //Face 2 Triangle 2
-	 0.5f,  0.5f,  0.5f,  //6
-	-0.5f,  0.5f,  0.5f,  //7
-	-0.5f, -0.5f,  0.5f,  //4
-
-	 //Face 3 Triangle 1
-	-0.5f,  0.5f,  0.5f,  //8
-	-0.5f,  0.5f, -0.5f,  //9
-	-0.5f, -0.5f, -0.5f,  //10
-	 //Face 3 Triangle 2
-	 -0.5f, -0.5f, -0.5f, //10
-	 -0.5f, -0.5f,  0.5f, //4
-	 -0.5f,  0.5f,  0.5f, //8
-
-	 //Face 4 Triangle 1
-	 0.5f,  0.5f,  0.5f, //11
-	 0.5f,  0.5f, -0.5f, //12
-	 0.5f, -0.5f, -0.5f, //13
-	 //Face 4 Triangle 2
-	 0.5f, -0.5f, -0.5f, //13
-	 0.5f, -0.5f,  0.5f, //14
-	 0.5f,  0.5f,  0.5f, //11
-
-	 //Face 5 Triangle 1
-	 -0.5f, -0.5f, -0.5f,//10
-	 0.5f, -0.5f, -0.5f,//15
-	 0.5f, -0.5f,  0.5f,//5
-	 //Face 5 Triangle 2
-	 0.5f, -0.5f,  0.5f,//5
-	 -0.5f, -0.5f,  0.5f,//4
-	 -0.5f, -0.5f, -0.5f,//10
-
-	 //Face 6 Triangle 1
-	 -0.5f,  0.5f, -0.5f,//3
-	 0.5f,  0.5f, -0.5f,//2
-	 0.5f,  0.5f,  0.5f,//11
-	 //Face 6 Triangle 2
-	 0.5f,  0.5f,  0.5f, //11
-	 -0.5f,  0.5f,  0.5f, //16
-	 -0.5f,  0.5f, -0.5f //3
-	};
-
-	constexpr float gCubeTexCoords[] = {
-		//Face 1 Triangle 1
-		0.0f, 0.0f,
-		1.0f, 0.0f, 
-		1.0f, 1.0f, 
-		//Face 1 Triangle 2
-		1.0f, 1.0f, 
-		0.0f, 1.0f, 
-		0.0f, 0.0f, 
-
-		//Face 2 Triangle 1
-		0.0f, 0.0f, 
-		1.0f, 0.0f, 
-		1.0f, 1.0f, 
-		//Face 2 Triangle 2
-		1.0f, 1.0f, 
-		0.0f, 1.0f, 
-		0.0f, 0.0f, 
-
-		//Face 3 Triangle 1
-		1.0f, 0.0f, 
-		1.0f, 1.0f, 
-		0.0f, 1.0f, 
-		//Face 3 Triangle 2
-		0.0f, 1.0f, 
-		0.0f, 0.0f, 
-		1.0f, 0.0f, 
-
-		//Face 4 Triangle 1
-		1.0f, 0.0f, 
-		1.0f, 1.0f, 
-		0.0f, 1.0f, 
-		//Face 4 Triangle 2
-		0.0f, 1.0f, 
-		0.0f, 0.0f, 
-		1.0f, 0.0f,
-
-		//Face 5 Triangle 1
-		0.0f, 1.0f,
-		1.0f, 1.0f, 
-		1.0f, 0.0f, 
-		//Face 5 Triangle 2
-		1.0f, 0.0f, 
-		0.0f, 0.0f, 
-		0.0f, 1.0f, 
-
-		//Face 6 Triangle 1
-		0.0f, 1.0f,
-		1.0f, 1.0f,
-		1.0f, 0.0f, 
-		//Face 6 Triangle 2
-		1.0f, 0.0f, 
-		0.0f, 0.0f, 
-		0.0f, 1.0f
-};
-
-	static const GLushort gCubeIndices[] = {
-			0, 1, 2,
-			2, 3, 0,
-			4, 5, 6,
-			6, 7, 4,
-			8, 9, 10,
-			10, 4, 8,
-			11, 12, 13,
-			13, 14, 11,
-			10, 15, 5,
-			5, 4, 10,
-			3, 2, 11,
-			11, 16, 3
-	};
-
 	HlMesh gBlockHlMesh{ HlMesh::arrFaces_t{
 				   //"North" facing South
-			HlMesh::face_t{{
+			HlMeshFace{{
 					{ {-0.5f, -0.5f,  0.5f}, { 0.0f, 0.0f}}, //4
 					{{ 0.5f, -0.5f,  0.5f}, { 1.0f, 0.0f}}, //5
 					{{ 0.5f,  0.5f,  0.5f}, { 1.0f, 1.0f}}, //6
@@ -140,10 +13,10 @@ namespace ul {
 					//{{ 0.5f,  0.5f,  0.5f}, { 1.0f, 1.0f}}, //6
 					{{-0.5f,  0.5f,  0.5f}, { 0.0f, 1.0f}}, //7
 					//{{-0.5f, -0.5f,  0.5f}, { 0.0f, 0.0f}} //4
-				}, 
+				},
 					{0,1,2,2,3,0}
 					//"East" facing West
-			},  HlMesh::face_t{{
+			},  HlMeshFace{{
 					{{ 0.5f,  0.5f,  0.5f}, { 0.0f, 1.0f}}, //11
 					{{ 0.5f,  0.5f, -0.5f}, { 1.0f, 1.0f}}, //12
 					{{ 0.5f, -0.5f, -0.5f}, { 1.0f, 0.0f}}, //13
@@ -154,7 +27,7 @@ namespace ul {
 				}, 
 					{0,3,2,2,1,0}
 					//"South" facing North
-			},  HlMesh::face_t{{
+			},  HlMeshFace{{
 					{{-0.5f, -0.5f, -0.5f}, { 1.0f, 0.0f}},
 					{{ 0.5f, -0.5f, -0.5f}, { 0.0f, 0.0f}},
 					{{ 0.5f,  0.5f, -0.5f}, { 0.0f, 1.0f}},
@@ -165,7 +38,7 @@ namespace ul {
 				},
 					{0,3,2,2,1,0}
 					//"West" facing East
-			}, HlMesh::face_t{{
+			}, HlMeshFace{{
 					{{-0.5f,  0.5f,  0.5f}, { 1.0f, 1.0f}}, //8
 					{{-0.5f,  0.5f, -0.5f}, { 0.0f, 1.0f}}, //9
 					{{-0.5f, -0.5f, -0.5f}, { 0.0f, 0.0f}}, //10
@@ -176,7 +49,7 @@ namespace ul {
 				},
 					{0,1,2,2,3,0}
 					//Up
-			}, HlMesh::face_t{{
+			}, HlMeshFace{{
 					{{-0.5f, -0.5f, -0.5f}, { 0.0f, 0.0f}}, //10
 					{{ 0.5f, -0.5f, -0.5f}, { 1.0f, 0.0f}}, //15
 					{{ 0.5f, -0.5f,  0.5f}, { 1.0f, 1.0f}}, //5
@@ -187,7 +60,7 @@ namespace ul {
 				},
 					{0,1,2,2,3,0}
 					//Down
-			},  HlMesh::face_t{{
+			}, HlMeshFace{{
 					{{-0.5f,  0.5f, -0.5f}, { 1.0f, 1.0f}}, //3
 					{{ 0.5f,  0.5f, -0.5f}, { 0.0f, 1.0f}}, //2
 					{{ 0.5f,  0.5f,  0.5f}, { 0.0f, 0.0f}}, //11

@@ -3,7 +3,6 @@
 #include "HlMesh.h"
 
 namespace ul {
-	
 
 	Mesh::Mesh(std::vector<HlMeshFace> faces) noexcept : m_VAO{ 0 }, m_VBO{ 0 }, m_EBO{ 0 }, m_ArrayIndex{ 0 }  {
 		for (auto& it : faces) {
@@ -16,17 +15,19 @@ namespace ul {
 			//TODO look for some fixes in the renderer (array dividor ?) to optimize memory here
 
 			//a vertex = 3 pos, vertices are appened together in the array, we want 1 id/vertex so vert number = total poses / 3
-			for(int i(0); i<dualVertex.first.size()/3; ++i)
+			for (int i(0); i < dualVertex.first.size() / 3; ++i)
 				m_TexIds.push_back(it.texId);
 		}
 		m_VerticesSize = m_Vertices.size() * sizeof(float);
 		m_TexCoordsSize = m_TexCoords.size() * sizeof(float);
 		m_IndicesSize = m_Indices.size() * sizeof(unsigned);
 		m_TexIdsSize = m_TexIds.size() * sizeof(int);
-
-		configure();
 	}
 	
+	bool Mesh::isConfigured() const noexcept {
+		return glIsBuffer(m_VAO) == GL_TRUE;
+	}
+
 	void Mesh::genDrawCommand() {
 		Renderer::IndirectDrawCmd testDraw;
 		testDraw.vertexCount = m_VerticesSize / 5; //Calculation to be confirmed
@@ -58,10 +59,6 @@ namespace ul {
 		glGenBuffers(1, &m_VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
-		/*glm::mat4 model = glm::mat4(1.f);
-		model = glm::translate(model, glm::vec3((float)0, 0.0f, (float)0));
-		model = glm::scale(model, glm::vec3(0.5f));*/
-
 		glBufferData(GL_ARRAY_BUFFER, m_VerticesSize + m_TexCoordsSize + m_TexIdsSize + sizeof(glm::mat4), 0, GL_STATIC_DRAW);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, m_VerticesSize, m_Vertices.data());
 		glBufferSubData(GL_ARRAY_BUFFER, m_VerticesSize, m_TexCoordsSize, m_TexCoords.data());
@@ -76,8 +73,6 @@ namespace ul {
 
 		glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)(m_VerticesSize+m_TexCoordsSize));
 		glEnableVertexAttribArray(2);
-
-		
 
 		return ++begin;
 	}

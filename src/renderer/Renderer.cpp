@@ -5,7 +5,6 @@
 #include "../ul.h"
 #include "../utils/StringUtils.h"
 #include "TextRenderer.h"
-#include "TextureArray.h"
 #include <fmt/format.h>
 
 namespace ul {
@@ -82,7 +81,7 @@ namespace ul {
 				return _inist;
 		}
 
-		m_Camera = new Camera{ /*physicManager.getCameraBody({0.f,0.f,0.f})*/ };
+		m_Camera = new Camera{  };
 
 		//linf << "Loading model matrices\n";
 		loadModelMatrices();
@@ -107,33 +106,22 @@ namespace ul {
 		TextRenderer txt;
 		txt.initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
 		
-		//Mesh cube{ gCubeVertices, sizeof(gCubeVertices), gCubeTexCoords, sizeof(gCubeTexCoords), nullptr, 0/*sizeof(gCubeIndices)*/};
-
-		Chunk ch{ {0,0,0} };
-
-		Mesh tbm = /*gBlockHlMesh.toMesh();*/ ch.toMesh(nullptr); // gBlockHlMesh.getAsMesh(HlMesh::Faces::UP);
-		//Mesh stbm(gCubeVertices, tbm.getVerticesSize(), nullptr, 0);
-
-		//linf << memcmp(tbm.getVertices(), cube.getVertices(), cube.getVerticesSize()) << "\n";
-			
-		RenderGroup cubeGroup{ static_cast<const Mesh&>(tbm), DEBUG_RENDER_AMOUNT, m_ModelMatrices };
-
-		//Chunk ch{ Position(0,0,0) };
-
-		//ch.initialize();
-		//ch.generate();
-		//ch.updateRender();
-
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		linf << "Done, loading texture\n";
 
-		auto texsLocationId = assetManager.addFolder("textures");
-		//Texture tex{ wtos(assetManager.getPath("atlas.png", texsLocationId)).c_str() };
-		TextureArray textures{ 16,16 };
-		textures.addFolder(assetManager.getPath(texsLocationId));
-		textures.load();
+		WorldObject::getWORegistry().push_back(&Blocks::STONE);
+		Blocks::AIR.setOpaque(false);
+		WorldObject::getWORegistry().push_back(&Blocks::AIR);
+		
+		Renderer::getInstance().getTextureManager().load();
+		HlMeshFace::defaultTexId = m_TextureManager.getTextureId("ul","error");
+		for (auto& it : WorldObject::getWORegistry()) it->initialize();
+
+		Chunk ch{ {0,0,0} };
+		Mesh tbm = ch.toMesh();
+		RenderGroup cubeGroup{ static_cast<const Mesh&>(tbm), DEBUG_RENDER_AMOUNT, m_ModelMatrices };
 
 		shader.use();
 		//shader.setInt("texture1", 1);
@@ -142,6 +130,9 @@ namespace ul {
 		shader.setMat4("projection", projection);
 
 		linf << "Done, Generating GPUs draw commands\n";
+
+		tbm.configure();
+		cubeGroup.configure(0);
 
 		tbm.genDrawCommand();
 		//cube.genDrawCommand();
@@ -152,10 +143,8 @@ namespace ul {
 		unsigned frameCount = 0;
 		unsigned lastFps = 0;
 		
-		//glActiveTexture(GL_TEXTURE1);
-		shader.setInt("texture1", textures.getTextureUnit());
-		glBindTextureUnit(textures.getTextureUnit(), textures.getId());
-		//shader.setInt("TexId", 2);
+		shader.setInt("textureUnit", m_TextureManager.getTextureUnit());
+		m_TextureManager.bind();
 
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();
@@ -180,12 +169,12 @@ namespace ul {
 			else if (std::roundf(view[1][2]) == 1) cardinal.push_back('D');
 
 
-			/*txt.startRender();
+			txt.startRender();
 			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
 			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
 			txt.render(fmt::format("Vertices: {}", tbm.getVerticesSize()/sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
 			txt.render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
-			txt.endRender();*/
+			txt.endRender();
 
 			shader.use();
 			shader.setMat4("view", view);
@@ -261,15 +250,15 @@ namespace ul {
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-		Renderer::getRenderer().frameBufferSizeC(window, width, height);
+		Renderer::getInstance().frameBufferSizeC(window, width, height);
 	}
 
 	void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-		Renderer::getRenderer().mouseC(window, xpos, ypos);
+		Renderer::getInstance().mouseC(window, xpos, ypos);
 	}
 
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-		Renderer::getRenderer().scrollC(window, xoffset, yoffset);
+		Renderer::getInstance().scrollC(window, xoffset, yoffset);
 	}
 
 	void logMat4(glm::mat4 model) {

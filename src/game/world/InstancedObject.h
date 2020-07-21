@@ -6,43 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace ul {
-	/*class InstancedObject {
-	public:
-		static InstancedObject Null;
-
-		InstancedObject(Position position) noexcept : m_Model{ 1.f } {
-			m_Model = glm::translate(m_Model, (glm::vec3)position);
-		}
-
-		InstancedObject(const glm::mat4& model) noexcept : m_Model(model) {}
-
-
-		Position getPosition() const noexcept {
-			return m_Model[3];
-		}
-
-		const glm::mat4& getModel() const noexcept {
-			return m_Model;
-		}
-
-		void translate(const Position& translation) noexcept {
-			m_Model = glm::translate(m_Model, (glm::vec3)translation);
-			onTranslated(translation);
-		}
-
-		void setPosition(const Position& position) noexcept {
-			m_Model[3] = (glm::vec4)position;
-		}
-
-		virtual void onTranslated(const Position& translation) {}
-
-	private:
-
-		glm::mat4 m_Model;
-	};
-
-	InstancedObject InstancedObject::Null{ glm::mat4{1.f} };*/
-
 	/*
 		TODO :
 		Use of 3*vec3 instead of mat4 with size & rotation
@@ -52,8 +15,18 @@ namespace ul {
 
 	*/
 	struct InstancedObject {
-		InstancedObject(glm::mat4 mod, const WorldObject& obj): model{std::move(mod)}, obj{obj} {}
-		glm::mat4 model;
-		const WorldObject& obj;
+		InstancedObject(glm::mat4 mod, const WorldObject& obj): m_Model{std::move(mod)}, m_Obj{obj} {}
+
+		inline const glm::mat4& getModel() const noexcept {
+			return m_Model;
+		}
+
+		inline const WorldObject& getWorldObject() const noexcept {
+			return m_Obj;
+		}
+
+	private:
+		glm::mat4 m_Model;
+		const WorldObject& m_Obj;
 	};
 }

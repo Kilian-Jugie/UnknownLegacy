@@ -1,6 +1,45 @@
 #include "Camera.h"
 
 namespace ul {
+	void Camera::processKeyboard(CameraMovement direction, float deltaTime) noexcept {
+		float velocity = m_MovementSpeed * deltaTime;
+		if (direction == CameraMovement::FORWARD)
+			m_Position += m_Front * velocity;
+		if (direction == CameraMovement::BACKWARD)
+			m_Position -= m_Front * velocity;
+		if (direction == CameraMovement::LEFT)
+			m_Position -= m_Right * velocity;
+		if (direction == CameraMovement::RIGHT)
+			m_Position += m_Right * velocity;
+	}
+	
+	void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch) noexcept {
+		xoffset *= m_MouseSensitivity;
+		yoffset *= m_MouseSensitivity;
+
+		m_Yaw += xoffset;
+		m_Pitch += yoffset;
+
+		if (constrainPitch) {
+			if (m_Pitch > 89.0f)
+				m_Pitch = 89.0f;
+			if (m_Pitch < -89.0f)
+				m_Pitch = -89.0f;
+		}
+
+		updateCameraVectors();
+	}
+	
+	void Camera::processMouseScroll(float yoffset) noexcept {
+		if (m_Zoom >= 1.0f && m_Zoom <= 45.0f)
+			m_Zoom -= yoffset;
+		if (m_Zoom <= 1.0f)
+			m_Zoom = 1.0f;
+		if (m_Zoom >= 45.0f)
+			m_Zoom = 45.0f;
+
+
+	}
 	void Camera::updateCameraVectors() noexcept {
 		// Calculate the new Front vector
 		glm::vec3 front;

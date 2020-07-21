@@ -15,6 +15,11 @@ namespace ul {
 			static InstancedObject& setPosition(InstancedObject& object, _P&& pos);
 
 		static const Position& position(InstancedObject& object);
+
+		static bool isNameResolved(std::string name);
+		static std::string getNameDomain (std::string name);
+		static std::string getNameValue(std::string name);
+		static std::pair<std::string, std::string> splitName(std::string name);
 	};
 }
 
