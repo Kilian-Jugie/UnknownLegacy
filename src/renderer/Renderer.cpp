@@ -8,16 +8,15 @@
 #include <fmt/format.h>
 
 namespace ul {
-	void Renderer::loadModelMatrices() {
-		for (size_t x(0u); x < DEBUG_RENDER_X; ++x) {
-			for (size_t z(0u); z < DEBUG_RENDER_Y; ++z) {
-				glm::mat4 model = glm::mat4(1.f);
-				model = glm::translate(model, glm::vec3((float)x, 0.0f, (float)z));
-				model = glm::scale(model, glm::vec3(0.5f));
-				//model = glm::rotate(model, 0.f, glm::vec3(1.f));
-				m_ModelMatrices[x * DEBUG_RENDER_X + z] = model;
-			}
-		}
+	Renderer::Renderer() : m_Window{ nullptr }, m_Camera{ nullptr }, m_TextureManager{ 16,16 } {
+		m_ChunksMesh = new Mesh({});
+	}
+
+	Renderer::~Renderer() {
+		if (m_isGlfwLoaded) freeGlfw();
+		if (m_ChunksMesh) delete m_ChunksMesh;
+		if (m_Shaders) delete m_Shaders;
+		if (m_TextRenderer) delete m_TextRenderer;
 	}
 
 	inline int Renderer::initGlfw() {
@@ -84,7 +83,7 @@ namespace ul {
 		m_Camera = new Camera{  };
 
 		//linf << "Loading model matrices\n";
-		loadModelMatrices();
+		//loadModelMatrices();
 		linf << "Compiling shaders\n";
 		
 		glEnable(GL_CULL_FACE);
@@ -94,65 +93,84 @@ namespace ul {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		///linf << "Shaders location: " << assetManager.getLocation(shaderLocationId).getPath().string() << "\n";
-		linf << "Vertex path: " << wtos(assetManager.getPath("vertex.glsl", shaderLocationId)) << "\n";
-		linf << "Fragment path: " << wtos(assetManager.getPath("fragment.glsl", shaderLocationId)) << "\n";
+		//linf << "Vertex path: " << wtos(assetManager.getPath("vertex.glsl", shaderLocationId)) << "\n";
+		//linf << "Fragment path: " << wtos(assetManager.getPath("fragment.glsl", shaderLocationId)) << "\n";
 
-		Shader shader(wtos(assetManager.getPath("vertex.glsl", shaderLocationId)).c_str(),
+		m_Shaders = new Shader(wtos(assetManager.getPath("vertex.glsl", shaderLocationId)).c_str(),
 			wtos(assetManager.getPath("fragment.glsl", shaderLocationId)).c_str());
+		
+		
+		m_TextRenderer = new TextRenderer();
+		m_TextRenderer->initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
+		
 
-		linf << "Done, filling VAO, VBO, (EBO)\n";
+		//linf << "Done, filling VAO, VBO, (EBO)\n";
 
-		TextRenderer txt;
-		txt.initialize(assetManager, shaderLocationId, { m_ScreenWidth, m_ScreenHeight });
+		
+		
+		
 		
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		linf << "Done, loading texture\n";
+		//linf << "Done, loading texture\n";
 
-		WorldObject::getWORegistry().push_back(&Blocks::STONE);
+		UnknownLegacy::getInstance().registerWorldObject(&Blocks::STONE);
 		Blocks::AIR.setOpaque(false);
-		WorldObject::getWORegistry().push_back(&Blocks::AIR);
+		UnknownLegacy::getInstance().registerWorldObject(&Blocks::AIR);
 		
 		Renderer::getInstance().getTextureManager().load();
 		HlMeshFace::defaultTexId = m_TextureManager.getTextureId("ul","error");
-		for (auto& it : WorldObject::getWORegistry()) it->initialize();
+		UnknownLegacy::getInstance().initializeWorldObjects();
 
 		Chunk ch{ {0,0,0} };
-		Mesh tbm = ch.toMesh();
-		RenderGroup cubeGroup{ static_cast<const Mesh&>(tbm), DEBUG_RENDER_AMOUNT, m_ModelMatrices };
+		Chunk ch2{ {1,0,0} };
+		//Mesh tbm = ch.toMesh();
+		*m_ChunksMesh = ch.toMesh();
+		*m_ChunksMesh += ch2.toMesh();
 
-		shader.use();
+		glm::mat4x4 model{ 1.f };
+		glm::translate(model, { 0,0,0 });
+	
+		RenderGroup cubeGroup{ static_cast<const Mesh&>(*m_ChunksMesh), 1, &model };
 		//shader.setInt("texture1", 1);
 
+		m_Shaders->use();
 		glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)m_ScreenWidth / (float)m_ScreenHeight, 0.1f, 100.0f);
-		shader.setMat4("projection", projection);
+		m_Shaders->setMat4("projection", projection);
 
 		linf << "Done, Generating GPUs draw commands\n";
 
-		tbm.configure();
+		m_ChunksMesh->configure();
 		cubeGroup.configure(0);
 
-		tbm.genDrawCommand();
+		m_ChunksMesh->genDrawCommand();
 		//cube.genDrawCommand();
 		
 		linf << "Done, entering main render loop\n";
-
-		int currentS = 0;
-		unsigned frameCount = 0;
-		unsigned lastFps = 0;
 		
-		shader.setInt("textureUnit", m_TextureManager.getTextureUnit());
-		m_TextureManager.bind();
+		
+		loop(assetManager, shaderLocationId);
 
+		//delete buf;
+		freeGlfw();
+		return 0;
+	}
+
+	void Renderer::loop(AssetsManager& assetManager, size_t shaderLocationId) {
+		int currentS = 0;
+		unsigned lastFps = 0;
+		unsigned frameCount = 0;
+
+		
+		m_Shaders->setInt("textureUnit", m_TextureManager.getTextureUnit());
+
+		m_TextureManager.bind();
 		while (!glfwWindowShouldClose(m_Window)) {
 			float currentFrame = glfwGetTime();
 			m_DeltaTime = currentFrame - m_LastFrame;
 			m_LastFrame = currentFrame;
 			++frameCount;
-
-			//physicManager.simulate(m_DeltaTime);
 
 			processInput(m_Window);
 
@@ -169,15 +187,15 @@ namespace ul {
 			else if (std::roundf(view[1][2]) == 1) cardinal.push_back('D');
 
 
-			txt.startRender();
-			txt.render(std::string("FPS: ")+fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
-			txt.render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight-50.f, 0.3);
-			txt.render(fmt::format("Vertices: {}", tbm.getVerticesSize()/sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
-			txt.render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
-			txt.endRender();
+			m_TextRenderer->startRender();
+			m_TextRenderer->render(std::string("FPS: ") + fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
+			m_TextRenderer->render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight - 50.f, 0.3);
+			m_TextRenderer->render(fmt::format("Vertices: {}", m_ChunksMesh->getVerticesSize() / sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
+			m_TextRenderer->render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
+			m_TextRenderer->endRender();
 
-			shader.use();
-			shader.setMat4("view", view);
+			m_Shaders->use();
+			m_Shaders->setMat4("view", view);
 
 			if ((int)(currentFrame + 1.f) > currentS) {
 				currentS = currentFrame + 1.f;
@@ -186,8 +204,10 @@ namespace ul {
 				frameCount = 0;
 			}
 
+			glBindVertexArray(m_ChunksMesh->getVAO());
+
 			//glBindVertexArray(cube.getVAO()/*Block::s_BlockMesh.getVAO()*/);
-			glBindVertexArray(tbm.getVAO());
+			
 
 			//glDrawArraysIndirect(GL_TRIANGLES, 0);
 			glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, 0);
@@ -195,10 +215,6 @@ namespace ul {
 			glfwSwapBuffers(m_Window);
 			glfwPollEvents();
 		}
-
-		//delete buf;
-		freeGlfw();
-		return 0;
 	}
 
 	void Renderer::loadBasicAssets() {

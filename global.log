@@ -2,11 +2,9 @@
 [INFO] Initializing GLFW...
 [INFO] Initialization done !
 [INFO] Compiling shaders
-[INFO] Vertex path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\vertex.glsl
-[INFO] Fragment path: A:\C++\UnknownLegacy\UnknownLegacy\Data\shaders\fragment.glsl
-[INFO] Done, filling VAO, VBO, (EBO)
-[INFO] Done, loading texture
 [INFO] Done, Generating GPUs draw commands
 [INFO] Done, entering main render loop
-ures\glass.png
+] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\cobblestone.png
+[INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\error.png
+[INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\glass.png
 [INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\stone.png

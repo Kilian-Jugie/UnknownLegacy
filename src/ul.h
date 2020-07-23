@@ -4,10 +4,12 @@
 #include "filesystem/AssetsManager.h"
 #include "utils/ErrorManager.h"
 #include "utils/Logger.h"
-#include "game/GameObject.h"
+
 //#include "physic/PhysicManager.h"
 
 namespace ul {
+	class WorldObject;
+
 	enum class ReturnCodes : int {
 		NOERROR
 	};
@@ -45,6 +47,10 @@ namespace ul {
 			return m_AssetsManager;
 		}
 
+		void registerWorldObject(WorldObject* go) noexcept;
+
+		void initializeWorldObjects() noexcept;
+
 	private:
 		UnknownLegacy() : m_ErrorManager{}, m_AssetsManager{ std::filesystem::current_path() / "Data" }, m_ShaderLocationId{ 0 }/*, m_PhysicManager{ nullptr }*/ {
 		};
@@ -52,7 +58,8 @@ namespace ul {
 		AssetsManager m_AssetsManager;
 		ErrorManager m_ErrorManager;
 		AssetsManager::id_t m_ShaderLocationId;
-		std::vector<GameObject> m_GameRegistry;
+		std::vector<WorldObject*> m_WorldObjectsRegistry;
+		
 		//PhysicManager* m_PhysicManager;
 		
 	};

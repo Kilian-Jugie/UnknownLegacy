@@ -18,11 +18,6 @@ namespace ul {
 			return m_BlockId;
 		}
 
-		inline Block& setOpaque(bool opaque) {
-			m_IsOpaque = opaque;
-			return *this;
-		}
-
 		private:
 			inline static id_t s_CurrentId = 0;
 			const id_t m_BlockId;

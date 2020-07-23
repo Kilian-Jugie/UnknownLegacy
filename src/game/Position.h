@@ -15,6 +15,15 @@ namespace ul {
 		Position(Position&&) = default;
 		Position(const Position& pos) : Position{ pos.x, pos.y, pos.z } {}
 
+		std::size_t operator[](std::size_t p) {
+			switch (p) {
+			case 0: return x;
+			case 1: return y;
+			case 2: return z;
+			default: return static_cast<size_t>(-1);
+			}
+		}
+
 		operator glm::vec3() const noexcept {
 			return glm::vec3(x, y, z);
 		}

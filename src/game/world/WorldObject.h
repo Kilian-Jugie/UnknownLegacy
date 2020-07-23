@@ -29,7 +29,12 @@ namespace ul {
 			return m_IsOpaque;
 		}
 
-		static std::vector<WorldObject*>& getWORegistry() {
+		virtual WorldObject& setOpaque(bool opaque) noexcept {
+			m_IsOpaque = opaque;
+			return *this;
+		}
+
+		static std::vector<WorldObject*>& getWORegistry() noexcept {
 			return WORegistry;
 		}
 

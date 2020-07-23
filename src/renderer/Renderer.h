@@ -21,6 +21,9 @@
 #endif
 
 namespace ul {
+	class Mesh;
+	class Shader;
+	class TextRenderer;
 
 	void logMat4(glm::mat4 model);
 
@@ -29,7 +32,7 @@ namespace ul {
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 	class Renderer {
-		Renderer() : m_Window{ nullptr }, m_Camera{ nullptr }, m_TextureManager{ 16,16 } {}
+		Renderer();
 
 		using physcallback_t = void(*)(float,void*);
 	public:
@@ -43,11 +46,10 @@ namespace ul {
 			return r;
 		}
 
-		~Renderer() {
-			if (m_isGlfwLoaded) freeGlfw();
-		}
+		~Renderer();
 
 		int render(AssetsManager& assetManager, size_t shaderLocationId/*, PhysicManager& physicManager*/);
+		void loop(AssetsManager& assetManager, size_t shaderLocationId);
 
 		void loadBasicAssets();
 
@@ -72,8 +74,6 @@ namespace ul {
 		};
 
 		private:
-			void loadModelMatrices();
-
 			int initGlfw();
 
 			private:
@@ -98,6 +98,9 @@ namespace ul {
 
 			GLFWwindow* m_Window;
 			TextureManager m_TextureManager;
+			Mesh* m_ChunksMesh;
+			Shader* m_Shaders;
+			TextRenderer* m_TextRenderer;
 	};
 
 	

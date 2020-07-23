@@ -23,6 +23,19 @@ namespace ul {
 		m_IndicesSize = m_Indices.size() * sizeof(unsigned);
 		m_TexIdsSize = m_TexIds.size() * sizeof(int);
 	}
+
+	Mesh& Mesh::operator+=(const Mesh& mesh) noexcept {
+		m_Vertices.insert(m_Vertices.end(), mesh.m_Vertices.begin(), mesh.m_Vertices.end());
+		m_TexCoords.insert(m_TexCoords.end(), mesh.m_TexCoords.begin(), mesh.m_TexCoords.end());
+		m_Indices.insert(m_Indices.end(), mesh.m_Indices.begin(), mesh.m_Indices.end());
+		m_TexIds.insert(m_TexIds.end(), mesh.m_TexIds.begin(), mesh.m_TexIds.end());
+
+		m_VerticesSize += mesh.m_VerticesSize;
+		m_TexCoordsSize += mesh.m_TexCoordsSize;
+		m_IndicesSize += mesh.m_IndicesSize;
+		m_TexIdsSize += mesh.m_TexIdsSize;
+		return *this;
+	}
 	
 	bool Mesh::isConfigured() const noexcept {
 		return glIsBuffer(m_VAO) == GL_TRUE;

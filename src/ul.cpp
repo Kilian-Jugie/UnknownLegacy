@@ -108,4 +108,12 @@ namespace ul {
 		ldeb << e.getDescription();
 		return true;
 	}
+	
+	void UnknownLegacy::registerWorldObject(WorldObject* go) noexcept {
+		m_WorldObjectsRegistry.push_back(go);
+	}
+	
+	void UnknownLegacy::initializeWorldObjects() noexcept {
+		for (auto it : m_WorldObjectsRegistry) it->initialize();
+	}
 }

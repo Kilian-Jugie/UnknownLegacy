@@ -12,6 +12,11 @@ namespace ul {
 		using buffer_t = unsigned int;
 
 		Mesh(std::vector<HlMeshFace> faces) noexcept;
+		Mesh(const Mesh&) = default;
+
+		Mesh& operator+=(const Mesh& mesh) noexcept;
+		Mesh& operator=(const Mesh&) = default;
+
 
 		~Mesh() {
 		}
