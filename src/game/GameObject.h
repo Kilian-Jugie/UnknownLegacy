@@ -1,5 +1,6 @@
 #pragma once
-#include <Types.h>
+#include "utils/Types.h"
+#include "utils/StringUtils.h"
 
 namespace ul {
 	class GameObject {

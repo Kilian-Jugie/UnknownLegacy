@@ -1,6 +1,6 @@
 #include "HlMesh.h"
-#include "../game/world/Chunk.h"
-#include "Logger.h"
+#include "game/world/Chunk.h"
+#include "utils/Logger.h"
 
 #define UL_FACE_BIT(f) (1<<(unsigned)f)
 #define UL_HAS_BIT(st, f) (st & UL_FACE_BIT(f))

@@ -1,7 +1,7 @@
 #include "TextRenderer.h"
 #include "Shader.h"
-#include "StringUtils.h"
-#include "Logger.h"
+#include "utils/StringUtils.h"
+#include "utils/Logger.h"
 #include <ft2build.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include FT_FREETYPE_H

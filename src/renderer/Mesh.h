@@ -1,8 +1,8 @@
 #pragma once
+#include "HlMeshFace.h"
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <vector>
-#include "HlMeshFace.h"
 
 namespace ul {
 	struct HlMeshFace;

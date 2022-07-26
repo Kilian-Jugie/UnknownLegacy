@@ -1,8 +1,7 @@
 #pragma once
-#include <vector>
 #include "Error.h"
 #include "Logger.h"
-
+#include <vector>
 
 namespace ul {
 	class ErrorManager {

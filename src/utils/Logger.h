@@ -1,8 +1,9 @@
 #pragma once
+#include "global.h"
+#include "Stream.h"
 #include <string>
 #include <iostream>
-#include "../global.h"
-#include "Stream.h"
+
 
 /*
 	TODO: uniformize using of char_t inside classes

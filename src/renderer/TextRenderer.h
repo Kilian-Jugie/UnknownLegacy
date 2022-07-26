@@ -1,8 +1,8 @@
 #pragma once
+#include "Shader.h"
+#include "filesystem/AssetsManager.h"
 #include <glm/glm.hpp>
 #include <map>
-#include "Shader.h"
-#include "../filesystem/AssetsManager.h"
 
 namespace ul {
 	class Shader;

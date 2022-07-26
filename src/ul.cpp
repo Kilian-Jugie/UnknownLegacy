@@ -1,17 +1,12 @@
 #include "ul.h"
-//#include "filesystem/AssetLocation.h"
 #include "utils/Logger.h"
-
-#include <iostream>
-
 #include "utils/debug.h"
 #include "renderer/Renderer.h"
 #include "game/world/WorldObject.h"
 
+#include <iostream>
 
 int main() {
-	
-
 	ul::UnknownLegacy& game = ul::UnknownLegacy::getInstance();
 	int r = static_cast<int>(game.start());
 	//system("pause");

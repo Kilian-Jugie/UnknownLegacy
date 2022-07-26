@@ -1,8 +1,8 @@
 #pragma once
+#include "HlMeshFace.h"
 #include <vector>
 #include <tuple>
 #include <glm/vec3.hpp>
-#include "HlMeshFace.h"
 
 namespace ul {
 	class Chunk;

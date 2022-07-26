@@ -1,9 +1,9 @@
 #include "Renderer.h"
 #include "Mesh.h"
 #include "RenderGroup.h"
-#include "../game/world/Chunk.h"
-#include "../ul.h"
-#include "../utils/StringUtils.h"
+#include "game/world/Chunk.h"
+#include "ul.h"
+#include "utils/StringUtils.h"
 #include "TextRenderer.h"
 
 namespace ul {

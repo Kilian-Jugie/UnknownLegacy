@@ -1,14 +1,12 @@
 #pragma once
-#include "../Position.h"
+#include "game/Position.h"
 #include "block/Block.h"
+#include "renderer/Mesh.h"
+#include "game/world/InstancedObject.h"
 #include <vector>
-#include "../renderer/Mesh.h"
-#include "../game/world/InstancedObject.h"
 #include <glm/mat4x4.hpp>
 
-
 namespace ul {
-
 	class Chunk {
 	public:
 		static constexpr std::size_t CHUNK_SIZE[] = { 16,256,16 };

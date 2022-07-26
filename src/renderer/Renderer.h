@@ -2,7 +2,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "StaticVertices.h"
-#include "../utils/Logger.h"
+#include "utils/Logger.h"
 #include "TextureManager.h"
 
 #include <glad/glad.h>

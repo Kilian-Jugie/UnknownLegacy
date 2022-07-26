@@ -1,6 +1,6 @@
 #pragma once
+#include "global.h"
 #include <string>
-#include "../global.h"
 
 namespace ul {
 	enum class ErrorLevel {

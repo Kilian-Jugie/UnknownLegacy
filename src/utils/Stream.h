@@ -1,7 +1,8 @@
 #pragma once
+#include "global.h"
 #include <string>
 #include <fstream>
-#include "../global.h"
+
 
 namespace ul {
 	/*UL_AN_NOTE("Move and streams ?")

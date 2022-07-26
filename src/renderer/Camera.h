@@ -1,9 +1,8 @@
 #pragma once
+#include "global.h"
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "../global.h"
-
 #include <vector>
 
 namespace ul {

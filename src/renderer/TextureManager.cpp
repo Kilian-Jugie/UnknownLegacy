@@ -1,9 +1,9 @@
 #include "TextureManager.h"
 #include "Image.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "glad/glad.h"
-#include "Logger.h"
-#include "../maths/Maths.h"
+#include "utils/Logger.h"
+#include "maths/Maths.h"
 
 namespace ul {
 	std::size_t TextureManager::Texture::ID_INCORRECT = std::numeric_limits<std::size_t>::max() - 1;

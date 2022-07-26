@@ -1,6 +1,8 @@
 #pragma once
-#include "../WorldObject.h"
-#include "../renderer/StaticVertices.h"
+#include "utils/Types.h"
+#include "utils/StringUtils.h"
+#include "game/world/WorldObject.h"
+#include "renderer/StaticVertices.h"
 
 namespace ul {
 	class Block : public WorldObject {

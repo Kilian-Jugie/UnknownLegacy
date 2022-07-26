@@ -1,6 +1,6 @@
 #pragma once
-#include "../GameObject.h"
-#include "../renderer/HlMesh.h"
+#include "game/GameObject.h"
+#include "renderer/HlMesh.h"
 
 namespace ul {
 	class WorldObject;

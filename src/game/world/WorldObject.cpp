@@ -1,5 +1,5 @@
 #include "WorldObject.h"
-#include "../renderer/Renderer.h"
+#include "renderer/Renderer.h"
 
 void ul::WorldObject::initialize() noexcept {
 	const HlMeshFace::texid_t texId = static_cast<HlMeshFace::texid_t>(

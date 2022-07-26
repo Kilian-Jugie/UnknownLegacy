@@ -75,7 +75,7 @@ namespace ul {
 	};
 
 #ifndef UL_NO_VEC3_PROXY_BIND
-#include "../utils/ProxyBind.h"
+#include "utils/ProxyBind.h"
 
 	template<typename _Ty2>class ul::ProxyBind<glm::vec3, _Ty2> {
 
