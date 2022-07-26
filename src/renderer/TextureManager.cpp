@@ -6,6 +6,7 @@
 #include "../maths/Maths.h"
 
 namespace ul {
+	std::size_t TextureManager::Texture::ID_INCORRECT = std::numeric_limits<std::size_t>::max() - 1;
 
 	void TextureManager::bind() const noexcept {
 		glBindTextureUnit(getTextureUnit(), getId());
@@ -13,15 +14,15 @@ namespace ul {
 
 	void TextureManager::load() {
 		std::vector<Image> tmpData;
+		uint32_t tId{ 0 };
 		try {
 			for (auto& dir : m_Paths) {
 				for (auto& it : std::filesystem::recursive_directory_iterator(dir.path)) {
 					if (it.is_regular_file()) {
-						linf << "Loading texture " << wtos(it.path()) << "\n";
+						linf << "Loading texture " << wtos(it.path()) << " as id " << tId++ << "\n";
 						tmpData.push_back({ wtos(it.path()).c_str() });
-						auto& file = it.path().filename().string();
+						auto file{ it.path().filename().string() };
 						m_Textures.push_back({file.substr(0,file.find_last_of('.')) , tmpData.size() - 1, dir });
-
 					}
 				}
 			}
@@ -42,7 +43,8 @@ namespace ul {
 		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-		glTexStorage3D(GL_TEXTURE_2D_ARRAY, log2_64(std::min(m_Width, m_Height)), GL_RGBA8, m_Width, m_Height, tmpData.size());
+		glTexStorage3D(GL_TEXTURE_2D_ARRAY, log2_64(std::min(m_Width, m_Height)), GL_RGBA8,
+			m_Width, m_Height, static_cast<GLsizei>(tmpData.size()));
 
 		auto layer = 0;
 		for (auto& it : tmpData) {

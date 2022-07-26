@@ -1,10 +1,8 @@
 #pragma once
-#include "../../fwd.h"
 #include "../WorldObject.h"
 #include "../renderer/StaticVertices.h"
 
 namespace ul {
-	
 	class Block : public WorldObject {
 	public:
 		template<typename _StrTy, typename _StrTy2,
@@ -18,13 +16,11 @@ namespace ul {
 			return m_BlockId;
 		}
 
+		static Block STONE;
+		static Block AIR;
+
 		private:
 			inline static id_t s_CurrentId = 0;
 			const id_t m_BlockId;
 	};
-
-	namespace Blocks {
-		Block STONE{ UL_STR("ul"), UL_STR("stone") };
-		Block AIR{ UL_STR("ul"), UL_STR("air") };
-	}
 }

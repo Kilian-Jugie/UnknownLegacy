@@ -1,8 +1,5 @@
 #pragma once
-#include <Types.h>
-#include "../Position.h"
-#include "InstancedObjectType.h"
-#include "../GameObject.h"
+#include "WorldObject.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace ul {

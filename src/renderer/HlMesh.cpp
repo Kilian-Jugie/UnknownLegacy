@@ -15,7 +15,7 @@ namespace ul {
 		static auto getFace = [&nrvo, &status, this](Faces face) {
 			auto v = this->get(face); //We need a copy to remove const qualifier
 			for (auto& it : v.indices) it += maxIndice;
-			maxIndice += v.vertices.size();
+			maxIndice += static_cast<unsigned>(v.vertices.size());
 			nrvo.emplace_back(std::move(v));
 			status |= UL_FACE_BIT(face);
 		};

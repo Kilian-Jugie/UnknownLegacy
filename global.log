@@ -4,7 +4,8 @@
 [INFO] Compiling shaders
 [INFO] Done, Generating GPUs draw commands
 [INFO] Done, entering main render loop
-] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\cobblestone.png
-[INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\error.png
-[INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\glass.png
-[INFO] Loading texture A:\C++\UnknownLegacy\UnknownLegacy\Data\textures\stone.png
+
+[INFO] Loading texture D:\SharedBuffer\UnknownLegacy\Data\textures\cobblestone.png as id 2
+[INFO] Loading texture D:\SharedBuffer\UnknownLegacy\Data\textures\error.png as id 3
+[INFO] Loading texture D:\SharedBuffer\UnknownLegacy\Data\textures\glass.png as id 4
+[INFO] Loading texture D:\SharedBuffer\UnknownLegacy\Data\textures\stone.png as id 5

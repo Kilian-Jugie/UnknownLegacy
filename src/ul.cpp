@@ -96,7 +96,7 @@ namespace ul {
 		lfat << "A fatal error has been throwed, process must stop !\n";
 		terminate();
 		UL_UNREACHABLE();
-		return false;
+		//return false;
 	}
 
 	bool UnknownLegacy::processWarning(Error& e) {

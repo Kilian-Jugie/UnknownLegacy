@@ -5,6 +5,8 @@ GLuint ul::RenderGroup::configure(GLuint arrayBegin) noexcept {
 	glBindBuffer(GL_ARRAY_BUFFER, m_Mesh.getVBO());
 	glBufferSubData(GL_ARRAY_BUFFER, m_Mesh.getModelBufferOffset(), sizeof(glm::mat4), &((*m_Models)[0]));
 
+#pragma warning(push)
+#pragma	warning(disable: 4312) // Typecast from GLuint to void* of greater size
 	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_Mesh.getModelBufferOffset()));
 	glVertexAttribDivisor(3, 1);
 	glEnableVertexAttribArray(3);
@@ -20,5 +22,6 @@ GLuint ul::RenderGroup::configure(GLuint arrayBegin) noexcept {
 	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(m_Mesh.getModelBufferOffset() + 3 * sizeof(glm::vec4)));
 	glVertexAttribDivisor(6, 1);
 	glEnableVertexAttribArray(6);
+#pragma warning(pop)
 	return ++arrayBegin;
 }

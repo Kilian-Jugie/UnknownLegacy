@@ -49,7 +49,7 @@ namespace ul {
 		~Renderer();
 
 		int render(AssetsManager& assetManager, size_t shaderLocationId/*, PhysicManager& physicManager*/);
-		void loop(AssetsManager& assetManager, size_t shaderLocationId);
+		void loop();
 
 		void loadBasicAssets();
 
@@ -57,9 +57,9 @@ namespace ul {
 
 		void processInput(GLFWwindow* window);
 
-		void frameBufferSizeC(GLFWwindow* window, int width, int height);
-		void mouseC(GLFWwindow* window, double xpos, double ypos);
-		void scrollC(GLFWwindow* window, double xoffset, double yoffset);
+		void frameBufferSizeC(int width, int height);
+		void mouseC(double xpos, double ypos);
+		void scrollC(double yoffset);
 
 		inline TextureManager& getTextureManager() noexcept {
 			return m_TextureManager;

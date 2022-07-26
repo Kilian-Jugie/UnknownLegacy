@@ -17,7 +17,7 @@ namespace ul {
 
 		virtual void initialize() noexcept override;
 
-		virtual const HlMesh& getMesh() const noexcept {
+		inline const HlMesh& getMesh() const noexcept {
 			return m_Mesh;
 		}
 
@@ -44,6 +44,4 @@ namespace ul {
 		static std::vector<WorldObject*> WORegistry;
 		HlMesh m_Mesh;
 	};
-
-	std::vector< WorldObject*> WorldObject::WORegistry = {};
 }

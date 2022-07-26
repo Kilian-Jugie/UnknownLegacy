@@ -24,6 +24,4 @@ namespace ul {
 
 		HlMeshFace& operator=(const HlMeshFace&) = default;
 	};
-
-	HlMeshFace::texid_t HlMeshFace::defaultTexId = 1;
 }

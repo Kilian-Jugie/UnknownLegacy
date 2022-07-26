@@ -30,6 +30,7 @@ namespace ul {
 			float yaw = YAW, float pitch = PITCH) noexcept 
 			: m_Front{ glm::vec3{0.0f, 0.0f, -1.0f} }, m_MovementSpeed{ SPEED }, m_MouseSensitivity{ SENSITIVITY }, m_Zoom{ ZOOM },
 			/*m_Position{ position },*/ m_WorldUp{ up }, m_Yaw{ yaw }, m_Pitch{ pitch } {
+			_CRT_UNUSED(position);
 			updateCameraVectors();
 		}
 

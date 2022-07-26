@@ -9,14 +9,14 @@ void ul::Chunk::initBlocks() {
 			for (int z(0); z < CHUNK_SIZE_Z; ++z) {
 				
 				if (x == 10 && y == 10 && z == 10) {
-					blocks[x][y].push_back(new InstancedObject(glm::mat4(), Blocks::AIR));
+					blocks[x][y].push_back(new InstancedObject(glm::mat4(), Block::AIR));
 					//blocks[x][y][z] = 
 					glm::translate(blocks[x][y][z]->getModel(), { x,y,z });
 					glm::scale(blocks[x][y][z]->getModel(), { 0.5f, 0.5f, 0.5f });
 				}
 				else {
 					//blocks[x][y][z] = ;
-					blocks[x][y].push_back(new InstancedObject(glm::mat4(), Blocks::STONE));
+					blocks[x][y].push_back(new InstancedObject(glm::mat4(), Block::STONE));
 					glm::translate(blocks[x][y][z]->getModel(), { x,y,z });
 					glm::scale(blocks[x][y][z]->getModel(), { 0.5f, 0.5f, 0.5f });
 				}
@@ -42,7 +42,7 @@ ul::Mesh ul::Chunk::toMesh() {
 			for (int z(0); z < CHUNK_SIZE_Z; ++z) {
 				auto tmpFaces = blocks[x][y][z]->getWorldObject().getMesh().cull(*this, { x,y,z });
 				if (!tmpFaces.empty()) {
-					float tr[] = { x,y,z };
+					float tr[] = { static_cast<float>(x),static_cast<float>(y),static_cast<float>(z) };
 					for (auto& it : tmpFaces) it.vertices = translate(it.vertices, tr, m_Position);
 					faces.insert(faces.end(), tmpFaces.begin(), tmpFaces.end());
 				}

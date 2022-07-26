@@ -36,6 +36,8 @@ namespace ul {
 
 	};
 
+#pragma warning(push)
+#pragma warning(disable: 4505) // Unreferenced fnc with internal linkage removed
 	static std::string wtos(const std::wstring& ws) {
 		static std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 		return conv.to_bytes(ws);
@@ -45,5 +47,6 @@ namespace ul {
 		static std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 		return conv.from_bytes(s);
 	}
+#pragma warning(pop)
 }
 

@@ -4,6 +4,6 @@ namespace ul {
 	class Block;
 	class BlockInstance;
 	class Instanciable;
-	class InstancedObject;
+	struct InstancedObject;
 	class Position;
 }

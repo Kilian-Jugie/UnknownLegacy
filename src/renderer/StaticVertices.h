@@ -3,7 +3,7 @@
 #include "HlMesh.h"
 
 namespace ul {
-	HlMesh gBlockHlMesh{ HlMesh::arrFaces_t{
+	static HlMesh gBlockHlMesh{ HlMesh::arrFaces_t{
 				   //"North" facing South
 			HlMeshFace{{
 					{ {-0.5f, -0.5f,  0.5f}, { 0.0f, 0.0f}}, //4

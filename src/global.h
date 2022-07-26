@@ -94,7 +94,7 @@ namespace ul {
 #define UL_ASSERT_NW(expr, msg) (!!(expr))||(_UL_COMP_ASSERT_FUNC(msg, _UL_WIDE(__FILE__), static_cast<unsigned>(__LINE__)),0)
 #define UL_ASSERT(expr, msg) UL_ASSERT_NW(expr, _UL_WIDE(msg))
 #define UL_ASSUME(x) UL_ASSERT_NW(x, _UL_WIDE("Assuming ")_UL_WIDE(_UL_STRINGIZE(x))_UL_WIDE(" failed!"))
-#define UL_UNREACHABLE() UL_ASSERT(0, "Unreachable code reached !!! THIS MUST BE CHANGED")
+#define UL_UNREACHABLE() UL_ASSERT(0, "Unreachable code reached !!! THIS MUST BE CHANGED"); _UL_COMP_UNREACH()
 #define UL_FORCEINLINE
 #define UL_INLINE
 #define UL_NOEXCEPT noexcept

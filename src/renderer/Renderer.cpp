@@ -5,7 +5,6 @@
 #include "../ul.h"
 #include "../utils/StringUtils.h"
 #include "TextRenderer.h"
-#include <fmt/format.h>
 
 namespace ul {
 	Renderer::Renderer() : m_Window{ nullptr }, m_Camera{ nullptr }, m_TextureManager{ 16,16 } {
@@ -106,21 +105,16 @@ namespace ul {
 
 		//linf << "Done, filling VAO, VBO, (EBO)\n";
 
-		
-		
-		
-		
-
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		//linf << "Done, loading texture\n";
 
-		UnknownLegacy::getInstance().registerWorldObject(&Blocks::STONE);
-		Blocks::AIR.setOpaque(false);
-		UnknownLegacy::getInstance().registerWorldObject(&Blocks::AIR);
+		UnknownLegacy::getInstance().registerWorldObject(&Block::STONE);
+		Block::AIR.setOpaque(false);
+		UnknownLegacy::getInstance().registerWorldObject(&Block::AIR);
 		
 		Renderer::getInstance().getTextureManager().load();
-		HlMeshFace::defaultTexId = m_TextureManager.getTextureId("ul","error");
+		HlMeshFace::defaultTexId = static_cast<HlMeshFace::texid_t>(m_TextureManager.getTextureId("ul","error"));
 		UnknownLegacy::getInstance().initializeWorldObjects();
 
 		Chunk ch{ {0,0,0} };
@@ -150,14 +144,14 @@ namespace ul {
 		linf << "Done, entering main render loop\n";
 		
 		
-		loop(assetManager, shaderLocationId);
+		loop();
 
 		//delete buf;
 		freeGlfw();
 		return 0;
 	}
 
-	void Renderer::loop(AssetsManager& assetManager, size_t shaderLocationId) {
+	void Renderer::loop() {
 		int currentS = 0;
 		unsigned lastFps = 0;
 		unsigned frameCount = 0;
@@ -167,7 +161,7 @@ namespace ul {
 
 		m_TextureManager.bind();
 		while (!glfwWindowShouldClose(m_Window)) {
-			float currentFrame = glfwGetTime();
+			float currentFrame = static_cast<float>(glfwGetTime());
 			m_DeltaTime = currentFrame - m_LastFrame;
 			m_LastFrame = currentFrame;
 			++frameCount;
@@ -188,17 +182,17 @@ namespace ul {
 
 
 			m_TextRenderer->startRender();
-			m_TextRenderer->render(std::string("FPS: ") + fmt::format_int(lastFps).str(), 10.f, m_ScreenHeight - 25.f, 0.3f);
-			m_TextRenderer->render(fmt::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight - 50.f, 0.3);
-			m_TextRenderer->render(fmt::format("Vertices: {}", m_ChunksMesh->getVerticesSize() / sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
-			m_TextRenderer->render(fmt::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
+			m_TextRenderer->render(std::string("FPS: ") + std::to_string(lastFps), 10.f, m_ScreenHeight - 25.f, 0.3f);
+			m_TextRenderer->render(std::format("XYZ: {} / {} / {}", m_Camera->getPosition().x, m_Camera->getPosition().y, m_Camera->getPosition().z), 10.f, m_ScreenHeight - 50.f, 0.3);
+			m_TextRenderer->render(std::format("Vertices: {}", m_ChunksMesh->getVerticesSize() / sizeof(float)), 10.f, m_ScreenHeight - 75.f, 0.3f);
+			m_TextRenderer->render(std::format("Watching: XYZ: {} / {} / {} Cardinal: {}", view[0][2], view[1][2], view[2][2], cardinal), 10.f, m_ScreenHeight - 100.f, 0.3f);
 			m_TextRenderer->endRender();
 
 			m_Shaders->use();
 			m_Shaders->setMat4("view", view);
 
 			if ((int)(currentFrame + 1.f) > currentS) {
-				currentS = currentFrame + 1.f;
+				currentS = static_cast<int>(currentFrame + 1.f);
 				//linf << frameCount << "FPS\n";
 				lastFps = frameCount;
 				frameCount = 0;
@@ -218,9 +212,6 @@ namespace ul {
 	}
 
 	void Renderer::loadBasicAssets() {
-		AssetsManager& assetManager = UnknownLegacy::getInstance().getAssetsManager();
-		
-		//assetManager.
 	}
 
 	inline void Renderer::freeGlfw() {
@@ -231,7 +222,6 @@ namespace ul {
 	inline void Renderer::processInput(GLFWwindow* window) {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
-		float cameraSpeed = 2.5f * m_DeltaTime;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 			m_Camera->processKeyboard(CameraMovement::FORWARD, m_DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -242,39 +232,43 @@ namespace ul {
 			m_Camera->processKeyboard(CameraMovement::RIGHT, m_DeltaTime);
 	}
 
-	inline void Renderer::frameBufferSizeC(GLFWwindow* window, int width, int height) {
+	inline void Renderer::frameBufferSizeC(int width, int height) {
 		glViewport(0, 0, width, height);
 	}
 
-	inline void Renderer::mouseC(GLFWwindow* window, double xpos, double ypos) {
+	inline void Renderer::mouseC(double xpos, double ypos) {
 		if (firstMouse) {
 			m_MouseLastX = static_cast<float>(xpos);
 			m_MouseLastY = static_cast<float>(ypos);
 			firstMouse = false;
 		}
 
-		float xoffset = xpos - m_MouseLastX;
-		float yoffset = m_MouseLastY - ypos; // reversed since y-coordinates go from bottom to top
-		m_MouseLastX = xpos;
-		m_MouseLastY = ypos;
+		float xoffset = static_cast<float>(xpos) - m_MouseLastX;
+		float yoffset = m_MouseLastY - static_cast<float>(ypos); // reversed since y-coordinates go from bottom to top
+		m_MouseLastX = static_cast<float>(xpos);
+		m_MouseLastY = static_cast<float>(ypos);
 
 		m_Camera->processMouseMovement(xoffset, yoffset);
 	}
 
-	inline void Renderer::scrollC(GLFWwindow* window, double xoffset, double yoffset) {
-		m_Camera->processMouseScroll(yoffset);
+	inline void Renderer::scrollC(double yoffset) {
+		m_Camera->processMouseScroll(static_cast<float>(yoffset));
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-		Renderer::getInstance().frameBufferSizeC(window, width, height);
+		_CRT_UNUSED(window);
+		Renderer::getInstance().frameBufferSizeC(width, height);
 	}
 
 	void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-		Renderer::getInstance().mouseC(window, xpos, ypos);
+		_CRT_UNUSED(window);
+		Renderer::getInstance().mouseC(xpos, ypos);
 	}
 
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-		Renderer::getInstance().scrollC(window, xoffset, yoffset);
+		_CRT_UNUSED(window);
+		_CRT_UNUSED(xoffset);
+		Renderer::getInstance().scrollC(yoffset);
 	}
 
 	void logMat4(glm::mat4 model) {

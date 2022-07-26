@@ -18,10 +18,10 @@ namespace ul {
 			for (int i(0); i < dualVertex.first.size() / 3; ++i)
 				m_TexIds.push_back(it.texId);
 		}
-		m_VerticesSize = m_Vertices.size() * sizeof(float);
-		m_TexCoordsSize = m_TexCoords.size() * sizeof(float);
-		m_IndicesSize = m_Indices.size() * sizeof(unsigned);
-		m_TexIdsSize = m_TexIds.size() * sizeof(int);
+		m_VerticesSize = static_cast<GLuint>(m_Vertices.size() * sizeof(float));
+		m_TexCoordsSize = static_cast<GLuint>(m_TexCoords.size() * sizeof(float));
+		m_IndicesSize = static_cast<GLuint>(m_Indices.size() * sizeof(unsigned));
+		m_TexIdsSize = static_cast<GLuint>(m_TexIds.size() * sizeof(int));
 	}
 
 	Mesh& Mesh::operator+=(const Mesh& mesh) noexcept {
@@ -81,11 +81,14 @@ namespace ul {
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 		glEnableVertexAttribArray(0);
 
+#pragma warning(push)
+#pragma	warning(disable: 4312) // Typecast from GLuint to void* of greater size
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (void*)(m_VerticesSize));
 		glEnableVertexAttribArray(1);
 
 		glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)(m_VerticesSize+m_TexCoordsSize));
 		glEnableVertexAttribArray(2);
+#pragma warning(pop)
 
 		return ++begin;
 	}

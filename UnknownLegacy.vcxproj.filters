@@ -73,6 +73,9 @@
     <Filter Include="data\shaders">
       <UniqueIdentifier>{6af847c7-6e15-46ab-b73b-3203356472c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\game\world\block">
+      <UniqueIdentifier>{8090c043-e121-44d5-a883-9a6bb56ec648}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ul.cpp">
@@ -88,9 +91,6 @@
       <Filter>Fichiers sources\utils</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\Error.cpp">
-      <Filter>Fichiers sources\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils\Logger.cpp">
       <Filter>Fichiers sources\utils</Filter>
     </ClCompile>
     <ClCompile Include="src\global.cpp">
@@ -134,6 +134,18 @@
     </ClCompile>
     <ClCompile Include="src\game\world\WorldObject.cpp">
       <Filter>Fichiers sources\game\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\HlMeshFace.cpp">
+      <Filter>Fichiers sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Position.cpp">
+      <Filter>Fichiers sources\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\world\block\Block.cpp">
+      <Filter>Fichiers sources\game\world\block</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filesystem\UlAssetsManager.cpp">
+      <Filter>Fichiers sources\filesystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

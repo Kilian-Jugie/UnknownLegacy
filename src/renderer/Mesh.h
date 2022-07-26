@@ -5,7 +5,7 @@
 #include "HlMeshFace.h"
 
 namespace ul {
-	class HlMeshFace;
+	struct HlMeshFace;
 
 	class Mesh {
 	public:

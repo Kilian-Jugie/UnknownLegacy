@@ -5,8 +5,8 @@
 
 namespace ul {
 	class TextureManager {
-		static unsigned ID_INDEX;
-		static unsigned UNIT_INDEX;
+		static inline unsigned ID_INDEX = 0;
+		static inline unsigned UNIT_INDEX = 0;
 
 	public:
 		struct TextureLocationPath {
@@ -22,7 +22,8 @@ namespace ul {
 			static std::size_t ID_INCORRECT;
 		};
 
-		TextureManager(unsigned width, unsigned height) : m_Width{ width }, m_Height{ height }, m_Id{ ID_INDEX++ }, m_TextureUnit{ UNIT_INDEX++ } {}
+		inline TextureManager(unsigned width, unsigned height) : m_Width{ width }, m_Height{ height }, m_Id{ ID_INDEX++ }, m_TextureUnit{ UNIT_INDEX++ } {}
+
 
 		void bind() const noexcept;
 
@@ -56,7 +57,6 @@ namespace ul {
 		unsigned m_Id, m_TextureUnit;
 	};
 
-	unsigned TextureManager::ID_INDEX = 0;
-	unsigned TextureManager::UNIT_INDEX = 0;
-	std::size_t TextureManager::Texture::ID_INCORRECT = std::numeric_limits<std::size_t>::max() - 1;
+	
+	
 }

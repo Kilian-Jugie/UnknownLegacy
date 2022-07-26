@@ -4,9 +4,9 @@
 #include "../global.h"
 
 namespace ul {
-	UL_AN_NOTE("Move and streams ?")
+	/*UL_AN_NOTE("Move and streams ?")
 	UL_AN_NOTE("Stream::write ?")
-	UL_AN_NOTE("Modularity std::ios::trunc")
+	UL_AN_NOTE("Modularity std::ios::trunc")*/
 
 	/*
 		Stream that allow reading or writting in a file
